@@ -1,17 +1,23 @@
 <template>
-  <button @click="play">Play</button>
   <div class="container">
     <router-view/>
   </div>
+  <MusicController :current-time-seconds="currentTimeSeconds" :duration-time-seconds="durationTimeSeconds"></MusicController>
 </template>
 
 <script>
+import MusicController from "@/components/MusicController";
+
 export default {
   name: "App",
-  methods: {
-    play() {
-      new Audio('/Song1.mp3').play();
+  components: {MusicController},
+  data() {
+    return {
+      currentTimeSeconds: 0,
+      durationTimeSeconds: 0,
     }
+  },
+  methods: {
   }
 }
 </script>
@@ -50,19 +56,4 @@ body {
   width: 100%;
   margin: 0 auto;
 }
-
-.triangle {
-  width: 0;
-  height: 0;
-  border: 14px solid;
-  border-top: none;
-  border-left-color: transparent;
-  border-right-color: transparent;
-  border-bottom-color: black;
-}
-
-.triangle-right {
-  transform: rotate(90deg);
-}
-
 </style>
