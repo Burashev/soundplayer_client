@@ -2,7 +2,7 @@
   <div class="container">
     <router-view/>
   </div>
-  <MusicController :current-time-seconds="currentTimeSeconds" :duration-time-seconds="durationTimeSeconds"></MusicController>
+  <MusicController></MusicController>
 </template>
 
 <script>
@@ -11,14 +11,6 @@ import MusicController from "@/components/MusicController";
 export default {
   name: "App",
   components: {MusicController},
-  data() {
-    return {
-      currentTimeSeconds: 0,
-      durationTimeSeconds: 0,
-    }
-  },
-  methods: {
-  }
 }
 </script>
 
@@ -28,13 +20,13 @@ $bg-color: #202124;
 
 /* Fonts */
 @font-face {
-  src: url("/assets/fonts/Inter-Regular.ttf");
+  src: url("~@/assets/fonts/Inter-Regular.ttf");
   font-family: "Inter";
   font-weight: 400;
 }
 
 @font-face {
-  src: url("/assets/fonts/Inter-Medium.ttf");
+  src: url("~@/assets/fonts/Inter-Medium.ttf");
   font-family: "Inter";
   font-weight: 500;
 }

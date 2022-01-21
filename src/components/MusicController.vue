@@ -26,8 +26,8 @@ export default {
   },
   components: {PlayButton},
   computed: {
-    ...mapState(["songState", "songCurrentTimeSeconds", "songDurationSeconds"]),
-    ...mapGetters(["songDuration", "songCurrentTime"]),
+    ...mapState("music", ["songState", "songCurrentTimeSeconds", "songDurationSeconds"]),
+    ...mapGetters("music", ["songDuration", "songCurrentTime"]),
     songPercent() {
       return (this.songDurationSeconds ? this.songCurrentTimeSeconds / this.songDurationSeconds * 100 : 0) + '%';
     }
@@ -35,7 +35,7 @@ export default {
   methods: {
     progressClick(e) {
       const time = this.songDurationSeconds * (e.clientX / e.target.offsetWidth);
-      this.$store.dispatch('setSongTime', time);
+      this.$store.dispatch('music/setSongTime', time);
     }
   }
 

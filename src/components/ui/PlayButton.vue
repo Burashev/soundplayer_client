@@ -49,10 +49,9 @@ export default {
   computed: {},
   methods: {
     buttonClick() {
-      this.$store.dispatch('setSong', 'https://ruo.morsmusic.org/load/1975802616/OBLADAET_-_FOR_MULA_(musmore.com).mp3');
-      this.$store.dispatch('togglePlay');
+      this.$store.dispatch('music/setSong', 'https://ruo.morsmusic.org/load/1975802616/OBLADAET_-_FOR_MULA_(musmore.com).mp3');
+      this.$store.dispatch('music/togglePlay');
     }
-
   }
 }
 </script>
