@@ -7,4 +7,5 @@ export default {
     },
     songDurationSeconds: 0,
     songCurrentTimeSeconds: 0,
+    volume: 1,
 }

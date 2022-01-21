@@ -12,4 +12,7 @@ export default {
     SET_SONG_CURRENT_TIME_SECONDS(state, time) {
         state.songCurrentTimeSeconds = time;
     },
+    SET_VOLUME(state, volume) {
+        state.volume = volume;
+    }
 }

@@ -5,29 +5,36 @@
     </div>
     <div class="music-controller__lower-block">
       <div class="music-controller__buttons">
-        <PlayButton :color="arrowColor" rotate="90" :paused="songState.paused || songState.ended"></PlayButton>
+        <PlayButton :paused="songState.paused || songState.ended"></PlayButton>
       </div>
       <span class="music-controller__duration">{{ songCurrentTime }} / {{ songDuration }}</span>
+      <div class="music-controller__volume">
+        <div class="music-controller__volume__over" @mouseleave="volumeBarHide" @mouseenter="volumeBarShow" v-show="isVolumeBarShow"></div>
+        <div class="music-controller__volume-bar" @mouseleave="volumeBarHide" @mouseenter="volumeBarShow" v-show="isVolumeBarShow">
+          <div class="music-controller__volume-bar__progress" @mousedown="changeVolume"></div>
+        </div>
+        <SpeakerButton size="30" @mouseenter="volumeBarShow"></SpeakerButton>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import PlayButton from "@/components/ui/PlayButton";
+import SpeakerButton from "@/components/ui/SpeakerButton";
 import {mapState, mapGetters} from 'vuex'
 
 export default {
   name: "MusicController",
   data() {
     return {
-      arrowColor: '#ffffff',
-
+      isVolumeBarShow: false,
     }
   },
-  components: {PlayButton},
+  components: {PlayButton, SpeakerButton},
   computed: {
     ...mapState("music", ["songState", "songCurrentTimeSeconds", "songDurationSeconds"]),
-    ...mapGetters("music", ["songDuration", "songCurrentTime"]),
+    ...mapGetters("music", ["songDuration", "songCurrentTime", "getVolume"]),
     songPercent() {
       return (this.songDurationSeconds ? this.songCurrentTimeSeconds / this.songDurationSeconds * 100 : 0) + '%';
     }
@@ -36,6 +43,18 @@ export default {
     progressClick(e) {
       const time = this.songDurationSeconds * (e.clientX / e.target.offsetWidth);
       this.$store.dispatch('music/setSongTime', time);
+    },
+    volumeBarShow() {
+      this.isVolumeBarShow = true;
+    },
+    volumeBarHide() {
+      this.isVolumeBarShow = false;
+    },
+    changeVolume(e) {
+      const coords = e.target.getBoundingClientRect();
+      const yCoord = coords.bottom - e.clientY;
+      const volume = yCoord / coords.height; // from one to zero
+      this.$store.dispatch('music/changeVolume', volume);
     }
   }
 
@@ -56,6 +75,7 @@ export default {
     height: 10px;
     cursor: pointer;
     position: relative;
+
     &:before {
       content: '';
       position: absolute;
@@ -70,7 +90,7 @@ export default {
   &__lower-block {
     display: flex;
     align-items: center;
-    padding: 0 50px;
+    padding: 0 70px;
     height: 80px;
   }
 
@@ -80,6 +100,51 @@ export default {
 
   &__duration {
     color: white;
+    margin-right: auto;
+  }
+
+  &__volume {
+    position: relative;
+    &__over {
+      position: absolute;
+      width: 100%;
+      height: 93px;
+      bottom: 0;
+      pointer-events: none;
+    }
+    &-bar {
+      height: 160px;
+      width: 40px;
+      border-radius: 7px;
+      background-color: #fff;
+      position: absolute;
+      //bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 20px 0;
+      margin-bottom: 80px;
+      bottom: 0;
+
+      &__progress {
+        height: 100%;
+        margin: 0 auto;
+        width: 9px;
+        background-color: #424244;
+        border-radius: 7px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+
+        &:before {
+          content: '';
+          position: absolute;
+          width: 100%;
+          bottom: 0;
+          height: v-bind(getVolume);
+          background-color: #ff3c3c;
+        }
+      }
+    }
   }
 }
 </style>

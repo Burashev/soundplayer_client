@@ -4,6 +4,7 @@ export default {
             return null;
         }
         const song = new Audio(source);
+        song.volume = 0.1;
         commit('SET_SONG_ELEMENT', {song, source});
     },
     togglePlay({commit, state, dispatch}) {
@@ -35,10 +36,14 @@ export default {
         const interval = setInterval(() => {
             if (state.songState.ended) clearInterval(interval);
             commit('SET_SONG_CURRENT_TIME_SECONDS', state.songElement.currentTime);
-        }, 300)
+        }, 100)
     },
     setSongTime({state, commit}, time) {
         if (state.songState.ended) return null;
         state.songElement.currentTime = time;
+    },
+    changeVolume({state, commit}, volume) {
+        if (state.songElement) state.songElement.volume = volume;
+        commit('SET_VOLUME', volume);
     }
 }
