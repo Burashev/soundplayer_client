@@ -1,49 +1,58 @@
 export default {
-    setSong({commit, state}, source) {
-        if (state.songSource === source) {
-            return null;
+    setCurrentSong({commit, state}, song) {
+        if (state.currentSong.id) {
+            state.currentSong.element.pause();
+            state.currentSong.element.currentTime = 0;
         }
-        const song = new Audio(source);
-        song.volume = 0.1;
-        commit('SET_SONG_ELEMENT', {song, source});
+
+        const element = new Audio(song.source);
+        element.volume = state.volume;
+
+        const currentSong = {
+            ...song,
+            element,
+            durationSeconds: 0,
+            currentTimeSeconds: 0,
+            paused: true,
+            ended: true,
+        }
+
+        commit('SET_CURRENT_SONG', currentSong);
     },
     togglePlay({commit, state, dispatch}) {
-        if (!state.songState.paused && !state.songState.ended) {
-            state.songElement.pause();
-            commit('SET_SONG_STATE', {
-                paused: true,
-                ended: false
-            });
+        if (!state.currentSong.id) return null
+
+        if (!state.currentSong.paused && !state.currentSong.ended) {
+            state.currentSong.element.pause();
+            commit('SET_SONG_PAUSE', true);
             return null;
         }
-        state.songElement.play()
+
+        state.currentSong.element.play()
             .then(() => {
-                commit('SET_SONG_DURATION_SECONDS', state.songElement.duration);
-                commit('SET_SONG_STATE', {
-                    paused: false,
-                    ended: false
-                });
+                commit('SET_SONG_PAUSE', false);
+                commit('SET_SONG_END', false);
+                commit('SET_SONG_DURATION_SECONDS', state.currentSong.element.duration);
                 dispatch('currentTimeCounting');
             });
-        state.songElement.addEventListener('ended', () => {
-            commit('SET_SONG_STATE', {
-                paused: false,
-                ended: true
-            });
+
+        state.currentSong.element.addEventListener('ended', () => {
+            commit('SET_SONG_END', true);
         })
     },
     currentTimeCounting({state, commit}) {
         const interval = setInterval(() => {
-            if (state.songState.ended) clearInterval(interval);
-            commit('SET_SONG_CURRENT_TIME_SECONDS', state.songElement.currentTime);
-        }, 100)
+            if (state.currentSong.ended) clearInterval(interval);
+            commit('SET_SONG_CURRENT_TIME_SECONDS', state.currentSong.element.currentTime);
+        }, 500)
     },
     setSongTime({state, commit}, time) {
-        if (state.songState.ended) return null;
-        state.songElement.currentTime = time;
+        if (state.currentSong.ended) return null;
+        state.currentSong.element.currentTime = time;
+        commit('SET_SONG_CURRENT_TIME_SECONDS', time);
     },
     changeVolume({state, commit}, volume) {
-        if (state.songElement) state.songElement.volume = volume;
+        if (state.currentSong.element) state.currentSong.element.volume = volume;
         commit('SET_VOLUME', volume);
     }
 }

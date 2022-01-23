@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import {mapState} from "vuex";
+
 export default {
   name: "ArrowUI",
   props: {
@@ -44,12 +46,21 @@ export default {
     paused: {
       type: Boolean,
       default: false
+    },
+    song: {
+      type: Object,
+      required: true
     }
   },
-  computed: {},
+  computed: {
+    ...mapState('music', ['currentSong']),
+  },
   methods: {
     buttonClick() {
-      this.$store.dispatch('music/setSong', 'https://ruo.morsmusic.org/load/1975802616/OBLADAET_-_FOR_MULA_(musmore.com).mp3');
+      if (this.song.id !== this.currentSong.id) {
+        this.$store.dispatch('music/setCurrentSong', this.song);
+      }
+
       this.$store.dispatch('music/togglePlay');
     }
   }

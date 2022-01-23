@@ -1,16 +1,18 @@
 <template>
   <div class="music-list">
-    <MusicItem></MusicItem>
-    <MusicItem></MusicItem>
-    <MusicItem></MusicItem>
+    <MusicItem v-for="song in songs" :key="song.id" :song="song"></MusicItem>
   </div>
 </template>
 
 <script>
 import MusicItem from "@/components/MusicItem";
+import { mapState } from 'vuex';
 export default {
   name: "MusicList",
-  components: {MusicItem}
+  components: {MusicItem},
+  computed: {
+    ...mapState('music', ['songs'])
+  }
 }
 </script>
 

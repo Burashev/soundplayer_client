@@ -3,15 +3,14 @@
     <div class="music-item__cover">
       <div class="music-item__cover__bg-cover"></div>
       <a class="music-item__cover__play-btn" href="#">
-        <div class="triangle triangle-right"></div>
+        <PlayButton :paused="true" size="17" :song="song"></PlayButton>
       </a>
-      <img src="../assets/images/GodzillaCover.jpg" alt="">
+      <img :src="song.cover" :alt="'The cover of the song ' + song.title">
     </div>
     <div class="music-item__text">
-      <h4>Some title something else</h4>
+      <h4>{{ song.title }}</h4>
       <p>
-        <a href="#">Author 1</a>
-        <a href="#">Author 2</a>
+        <a href="#">{{ song.author }}</a>
       </p>
     </div>
     <span class="music-item__duration">2:40</span>
@@ -19,8 +18,21 @@
 </template>
 
 <script>
+import PlayButton from "@/components/ui/PlayButton";
+import {mapState} from "vuex";
+
 export default {
-  name: "MusicItem"
+  components: {PlayButton},
+  name: "MusicItem",
+  props: {
+    song: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    ...mapState('music', ['songElement'])
+  }
 }
 </script>
 
@@ -59,12 +71,6 @@ export default {
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-
-      .triangle {
-        border-width: 10px;
-        border-bottom-color: #fff;
-      }
-
       opacity: 0;
     }
 

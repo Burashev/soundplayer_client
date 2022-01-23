@@ -5,7 +5,7 @@
     </div>
     <div class="music-controller__lower-block">
       <div class="music-controller__buttons">
-        <PlayButton :paused="songState.paused || songState.ended"></PlayButton>
+        <PlayButton :paused="currentSong.paused || currentSong.ended" :song="currentSong"></PlayButton>
       </div>
       <span class="music-controller__duration">{{ songCurrentTime }} / {{ songDuration }}</span>
       <div class="music-controller__volume">
@@ -33,15 +33,15 @@ export default {
   },
   components: {PlayButton, SpeakerButton},
   computed: {
-    ...mapState("music", ["songState", "songCurrentTimeSeconds", "songDurationSeconds"]),
+    ...mapState("music", ["currentSong"]),
     ...mapGetters("music", ["songDuration", "songCurrentTime", "getVolume"]),
     songPercent() {
-      return (this.songDurationSeconds ? this.songCurrentTimeSeconds / this.songDurationSeconds * 100 : 0) + '%';
+      return (this.currentSong.durationSeconds ? this.currentSong.currentTimeSeconds / this.currentSong.durationSeconds * 100 : 0) + '%';
     }
   },
   methods: {
     progressClick(e) {
-      const time = this.songDurationSeconds * (e.clientX / e.target.offsetWidth);
+      const time = this.currentSong.durationSeconds * (e.clientX / e.target.offsetWidth);
       this.$store.dispatch('music/setSongTime', time);
     },
     volumeBarShow() {
@@ -116,7 +116,7 @@ export default {
       height: 160px;
       width: 40px;
       border-radius: 7px;
-      background-color: #fff;
+      background-color: #2d2d2f;
       position: absolute;
       //bottom: 80px;
       left: 50%;

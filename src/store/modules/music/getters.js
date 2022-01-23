@@ -2,10 +2,10 @@ import {timeFormat} from '@/services/utils'
 
 export default {
     songDuration(state) {
-        return timeFormat(state.songDurationSeconds)
+        return timeFormat(state.currentSong.durationSeconds)
     },
     songCurrentTime(state) {
-        return timeFormat(state.songCurrentTimeSeconds)
+        return timeFormat(state.currentSong.currentTimeSeconds)
     },
     getVolume(state) {
         return state.volume * 100 + '%';

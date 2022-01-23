@@ -1,16 +1,18 @@
 export default {
-    SET_SONG_ELEMENT(state, {song, source}) {
-        state.songElement = song;
-        state.songSource = source;
+    SET_CURRENT_SONG(state, currentSong) {
+        state.currentSong = currentSong;
     },
     SET_SONG_DURATION_SECONDS(state, time) {
-        state.songDurationSeconds = time;
+        state.currentSong.durationSeconds = time;
     },
-    SET_SONG_STATE(state, songState) {
-        state.songState = songState
+    SET_SONG_PAUSE(state, isPause) {
+        state.currentSong.paused = isPause
+    },
+    SET_SONG_END(state, isEnd) {
+        state.currentSong.ended = isEnd
     },
     SET_SONG_CURRENT_TIME_SECONDS(state, time) {
-        state.songCurrentTimeSeconds = time;
+        state.currentSong.currentTimeSeconds = time;
     },
     SET_VOLUME(state, volume) {
         state.volume = volume;
