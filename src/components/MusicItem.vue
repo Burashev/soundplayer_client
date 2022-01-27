@@ -3,7 +3,10 @@
     <div class="music-item__cover">
       <div class="music-item__cover__bg-cover"></div>
       <a class="music-item__cover__play-btn" href="#">
-        <PlayButton :paused="true" size="17" :song="song"></PlayButton>
+        <PlayButton :paused="isPaused"
+                    size="17"
+                    :song="song">
+        </PlayButton>
       </a>
       <img :src="song.cover" :alt="'The cover of the song ' + song.title">
     </div>
@@ -31,7 +34,11 @@ export default {
     }
   },
   computed: {
-    ...mapState('music', ['songElement'])
+    ...mapState('music', ['currentSong']),
+    isPaused() {
+      if (this.song.id === this.currentSong.id) return this.currentSong.paused;
+      return true;
+    }
   }
 }
 </script>

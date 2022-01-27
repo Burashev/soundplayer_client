@@ -1,14 +1,19 @@
 <template>
-  <MusicList></MusicList>
-
+  <MusicList :songs="songs"></MusicList>
+  <MusicPlaylist :playlist="playlists[0]"></MusicPlaylist>
 </template>
 
 <script>
 import MusicList from "@/components/MusicList";
+import MusicPlaylist from "@/components/MusicPlaylist";
+import {mapState} from "vuex";
 
 export default {
   name: "Index",
-  components: {MusicList}
+  components: {MusicList, MusicPlaylist},
+  computed: {
+    ...mapState('music', ['songs', 'playlists']),
+  }
 }
 </script>
 

@@ -17,6 +17,8 @@ export default {
             ended: true,
         }
 
+        element.addEventListener('loadedmetadata', () => commit('SET_SONG_DURATION_SECONDS', element.duration));
+
         commit('SET_CURRENT_SONG', currentSong);
     },
     togglePlay({commit, state, dispatch}) {
@@ -32,7 +34,6 @@ export default {
             .then(() => {
                 commit('SET_SONG_PAUSE', false);
                 commit('SET_SONG_END', false);
-                commit('SET_SONG_DURATION_SECONDS', state.currentSong.element.duration);
                 dispatch('currentTimeCounting');
             });
 

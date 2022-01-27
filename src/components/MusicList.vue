@@ -10,15 +10,17 @@ import { mapState } from 'vuex';
 export default {
   name: "MusicList",
   components: {MusicItem},
-  computed: {
-    ...mapState('music', ['songs'])
+  props: {
+    songs: {
+      type: Array,
+      required: true
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .music-list {
-  margin-top: 100px;
   display: grid;
   grid-row-gap: 20px;
 }
