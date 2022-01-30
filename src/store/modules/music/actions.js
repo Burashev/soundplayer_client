@@ -1,3 +1,5 @@
+import songService from '@/services/songService';
+
 export default {
     setCurrentSong({commit, state}, song) {
         if (state.currentSong.id) {
@@ -11,15 +13,19 @@ export default {
         const currentSong = {
             ...song,
             element,
-            durationSeconds: 0,
             currentTimeSeconds: 0,
             paused: true,
             ended: true,
         }
 
-        element.addEventListener('loadedmetadata', () => commit('SET_SONG_DURATION_SECONDS', element.duration));
-
         commit('SET_CURRENT_SONG', currentSong);
+    },
+    loadSongs({commit}) {
+        songService.getAllSongs().then(data => {
+            const songs = data.data;
+            commit('SET_SONGS', songs);
+        });
+
     },
     togglePlay({commit, state, dispatch}) {
         if (!state.currentSong.id) return null

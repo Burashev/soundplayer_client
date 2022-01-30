@@ -16,5 +16,8 @@ export default {
     },
     SET_VOLUME(state, volume) {
         state.volume = volume;
+    },
+    SET_SONGS(state, songs) {
+        state.songs = songs;
     }
 }

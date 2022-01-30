@@ -13,7 +13,7 @@
     <div class="music-item__text">
       <h4>{{ song.title }}</h4>
       <p>
-        <a href="#">{{ song.author }}</a>
+        <a href="#">{{ song.author.name }}</a>
       </p>
     </div>
     <span class="music-item__duration">2:40</span>
