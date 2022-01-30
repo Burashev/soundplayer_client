@@ -7,12 +7,16 @@
 import MusicList from "@/components/MusicList";
 import MusicPlaylist from "@/components/MusicPlaylist";
 import {mapState} from "vuex";
+import songService from '@/services/songService';
 
 export default {
   name: "Index",
   components: {MusicList, MusicPlaylist},
   computed: {
     ...mapState('music', ['songs', 'playlists']),
+  },
+  created() {
+    songService.getAllSongs();
   }
 }
 </script>
