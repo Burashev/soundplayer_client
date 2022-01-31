@@ -34,10 +34,7 @@ export default {
   components: {PlayButton, SpeakerButton},
   computed: {
     ...mapState("music", ["currentSong"]),
-    ...mapGetters("music", ["songDuration", "songCurrentTime", "getVolume"]),
-    songPercent() {
-      return (this.currentSong.durationSeconds ? this.currentSong.currentTimeSeconds / this.currentSong.durationSeconds * 100 : 0) + '%';
-    }
+    ...mapGetters("music", ["songDuration", "songCurrentTime", "getVolume", "songPercent"]),
   },
   methods: {
     progressClick(e) {

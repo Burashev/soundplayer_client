@@ -19,5 +19,8 @@ export default {
     },
     SET_SONGS(state, songs) {
         state.songs = songs;
+    },
+    SET_MAIN_PLAYLISTS(state, playlists) {
+        state.main_playlists = playlists
     }
 }

@@ -10,7 +10,7 @@ export default {
         currentSongIndex: 0,
         playlistId: 1,
     },
-    playlists: [
+    main_playlists: [
         {
             id: 1,
             title: 'Some playlist title',

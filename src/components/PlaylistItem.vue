@@ -1,6 +1,6 @@
 <template>
   <div class="music-playlist">
-    <h2>{{ playlist.title }}</h2>
+    <h1 class="music-playlist__title">{{ playlist.title }}</h1>
     <MusicList :songs="playlist.songs"></MusicList>
   </div>
 </template>
@@ -9,7 +9,7 @@
 import MusicList from "@/components/MusicList";
 
 export default {
-  name: "MusicPlaylist",
+  name: "PlaylistItem",
   components: {MusicList},
   props: {
     playlist: {
@@ -21,6 +21,11 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.music-playlist {
+  &__title {
+    color: white;
+    letter-spacing: 0.01em;
+  }
+}
 </style>

@@ -9,5 +9,8 @@ export default {
     },
     getVolume(state) {
         return state.volume * 100 + '%';
+    },
+    songPercent(state) {
+        return (state.currentSong.durationSeconds ? state.currentSong.currentTimeSeconds / state.currentSong.durationSeconds * 100 : 0) + '%';
     }
 }

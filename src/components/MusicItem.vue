@@ -16,13 +16,14 @@
         <a href="#">{{ song.author.name }}</a>
       </p>
     </div>
-    <span class="music-item__duration">2:40</span>
+    <span class="music-item__duration">{{ songDuration }}</span>
   </div>
 </template>
 
 <script>
 import PlayButton from "@/components/ui/PlayButton";
 import {mapState} from "vuex";
+import {timeFormat} from "@/services/utils"
 
 export default {
   components: {PlayButton},
@@ -38,6 +39,9 @@ export default {
     isPaused() {
       if (this.song.id === this.currentSong.id) return this.currentSong.paused;
       return true;
+    },
+    songDuration() {
+      return timeFormat(this.song.durationSeconds);
     }
   }
 }
@@ -106,6 +110,7 @@ export default {
     h4 {
       color: white;
       margin-bottom: 10px;
+      letter-spacing: 0.01em;
     }
 
     p {

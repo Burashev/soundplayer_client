@@ -1,4 +1,5 @@
 import songService from '@/services/songService';
+import playlistService from "@/services/playlistService";
 
 export default {
     setCurrentSong({commit, state}, song) {
@@ -25,7 +26,12 @@ export default {
             const songs = data.data;
             commit('SET_SONGS', songs);
         });
-
+    },
+    loadPlaylistsOnMain({commit}) {
+        playlistService.getPlaylistsOnMain().then(data => {
+            const playlists = data.data;
+            commit('SET_MAIN_PLAYLISTS', playlists)
+        })
     },
     togglePlay({commit, state, dispatch}) {
         if (!state.currentSong.id) return null
