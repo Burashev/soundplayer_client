@@ -50,6 +50,9 @@ export default {
     song: {
       type: Object,
       required: true
+    },
+    playlist: {
+      type: Object
     }
   },
   computed: {
@@ -59,8 +62,8 @@ export default {
     buttonClick() {
       if (this.song.id !== this.currentSong.id) {
         this.$store.dispatch('music/setCurrentSong', this.song);
+        this.$store.dispatch('music/setCurrentPlaylist', this.playlist)
       }
-
       this.$store.dispatch('music/togglePlay');
     }
   }

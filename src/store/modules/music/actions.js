@@ -21,6 +21,16 @@ export default {
 
         commit('SET_CURRENT_SONG', currentSong);
     },
+    setCurrentPlaylist({commit, state}, playlist) {
+        const currentSongIndex = playlist.songs.findIndex((song) => song.id === state.currentSong.id)
+
+        const currentPlaylist = {
+            playlistObject: playlist,
+            currentSongIndex
+        }
+
+        commit('SET_CURRENT_PLAYLIST', currentPlaylist);
+    },
     loadSongs({commit}) {
         songService.getAllSongs().then(data => {
             const songs = data.data;

@@ -3,10 +3,12 @@
     <div class="music-item__cover">
       <div class="music-item__cover__bg-cover"></div>
       <a class="music-item__cover__play-btn" href="#">
-        <PlayButton :paused="isPaused"
-                    size="17"
-                    :song="song">
-        </PlayButton>
+        <PlayButton
+            :paused="isPaused"
+            size="17"
+            :song="song"
+            :playlist="playlist"
+        />
       </a>
       <img :src="song.cover" :alt="'The cover of the song ' + song.title">
     </div>
@@ -30,6 +32,10 @@ export default {
   name: "MusicItem",
   props: {
     song: {
+      type: Object,
+      required: true
+    },
+    playlist: {
       type: Object,
       required: true
     }

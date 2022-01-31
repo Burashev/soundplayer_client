@@ -1,6 +1,6 @@
 <template>
   <div class="music-list">
-    <MusicItem v-for="song in songs" :key="song.id" :song="song"></MusicItem>
+    <MusicItem v-for="song in songs" :key="song.id" :song="song" :playlist="playlist"></MusicItem>
   </div>
 </template>
 
@@ -13,6 +13,10 @@ export default {
   props: {
     songs: {
       type: Array,
+      required: true
+    },
+    playlist: {
+      type: Object,
       required: true
     }
   }

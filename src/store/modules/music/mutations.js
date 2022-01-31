@@ -2,6 +2,9 @@ export default {
     SET_CURRENT_SONG(state, currentSong) {
         state.currentSong = currentSong;
     },
+    SET_CURRENT_PLAYLIST(state, playlist) {
+        state.currentPlaylist = playlist;
+    },
     SET_SONG_DURATION_SECONDS(state, time) {
         state.currentSong.durationSeconds = time;
     },
