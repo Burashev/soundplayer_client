@@ -44,7 +44,7 @@ export default {
         })
     },
     togglePlay({commit, state, dispatch}) {
-        if (!state.currentSong.id) return null
+        if (!state.currentSong.id) return null;
 
         if (!state.currentSong.paused && !state.currentSong.ended) {
             state.currentSong.element.pause();
@@ -59,9 +59,9 @@ export default {
                 dispatch('currentTimeCounting');
             });
 
-        state.currentSong.element.addEventListener('ended', () => {
+        state.currentSong.element.onended = () => {
             commit('SET_SONG_END', true);
-        })
+        };
     },
     currentTimeCounting({state, commit}) {
         const interval = setInterval(() => {
