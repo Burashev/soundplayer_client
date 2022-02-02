@@ -22,6 +22,8 @@ export default {
         commit('SET_CURRENT_SONG', currentSong);
     },
     setCurrentPlaylist({commit, state}, playlist) {
+        if (playlist.id === state.currentPlaylist.playlistObject.id) return null;
+
         const currentSongIndex = playlist.songs.findIndex((song) => song.id === state.currentSong.id)
 
         const currentPlaylist = {
@@ -60,7 +62,18 @@ export default {
             });
 
         state.currentSong.element.onended = () => {
-            commit('SET_SONG_END', true);
+            const songs = state.currentPlaylist.playlistObject.songs;
+            const currentIndex = state.currentPlaylist.currentSongIndex;
+
+            if (songs.length - 1 === currentIndex) {
+                console.log(songs.length);
+                console.log(currentIndex);
+                commit('SET_SONG_END', true);
+                return null;
+            }
+
+            dispatch('setCurrentSong', songs[currentIndex + 1]);
+            dispatch('togglePlay');
         };
     },
     currentTimeCounting({state, commit}) {

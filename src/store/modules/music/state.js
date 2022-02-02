@@ -7,7 +7,7 @@ export default {
     },
     currentPlaylist: {
         currentSongIndex: 0,
-        playlistObject: 1,
+        playlistObject: {},
     },
     main_playlists: [],
     volume: 1,
