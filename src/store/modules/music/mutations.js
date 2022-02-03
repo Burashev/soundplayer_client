@@ -24,6 +24,6 @@ export default {
         state.songs = songs;
     },
     SET_MAIN_PLAYLISTS(state, playlists) {
-        state.main_playlists = playlists
+        state.playlistsOnMain = playlists
     }
 }

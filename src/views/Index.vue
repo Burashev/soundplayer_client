@@ -1,6 +1,6 @@
 <template>
 <!--  <MusicList :songs="songs"></MusicList>-->
-<PlaylistList :playlists="main_playlists"/>
+<PlaylistList :playlists="playlistsOnMain"/>
 </template>
 
 <script>
@@ -12,7 +12,7 @@ export default {
   name: "Index",
   components: {MusicList, PlaylistList},
   computed: {
-    ...mapState('music', ['songs', 'main_playlists']),
+    ...mapState('music', ['songs', 'playlistsOnMain']),
   },
   created() {
       // this.$store.dispatch('music/loadSongs');

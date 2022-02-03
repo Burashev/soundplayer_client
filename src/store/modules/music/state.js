@@ -9,7 +9,7 @@ export default {
         currentSongIndex: 0,
         playlistObject: {},
     },
-    main_playlists: [],
+    playlistsOnMain: [],
     volume: 1,
     songs: [],
 }

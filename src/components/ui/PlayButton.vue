@@ -60,11 +60,7 @@ export default {
   },
   methods: {
     buttonClick() {
-      if (this.song.id !== this.currentSong.id) {
-        this.$store.dispatch('music/setCurrentSong', this.song);
-        this.$store.dispatch('music/setCurrentPlaylist', this.playlist)
-      }
-      this.$store.dispatch('music/togglePlay');
+      this.$store.dispatch('music/setCurrentSong', {song: this.song, playlist: this.playlist});
     }
   }
 }

@@ -2,7 +2,12 @@ import songService from '@/services/songService';
 import playlistService from "@/services/playlistService";
 
 export default {
-    setCurrentSong({commit, state}, song) {
+    setCurrentSong({commit, state, dispatch}, {song, playlist}) {
+        if (song.id === state.currentSong.id) {
+            dispatch('togglePlay');
+            return null
+        }
+
         if (state.currentSong.id) {
             state.currentSong.element.pause();
             state.currentSong.element.currentTime = 0;
@@ -20,10 +25,12 @@ export default {
         }
 
         commit('SET_CURRENT_SONG', currentSong);
+
+        dispatch('setCurrentPlaylist', playlist);
+        dispatch('togglePlay');
     },
     setCurrentPlaylist({commit, state}, playlist) {
-        if (playlist.id === state.currentPlaylist.playlistObject.id) return null;
-
+        // if (playlist.id === state.currentPlaylist.playlistObject.id) return null;
         const currentSongIndex = playlist.songs.findIndex((song) => song.id === state.currentSong.id)
 
         const currentPlaylist = {
@@ -66,14 +73,12 @@ export default {
             const currentIndex = state.currentPlaylist.currentSongIndex;
 
             if (songs.length - 1 === currentIndex) {
-                console.log(songs.length);
-                console.log(currentIndex);
+                commit('SET_SONG_PAUSE', true);
                 commit('SET_SONG_END', true);
                 return null;
             }
-
-            dispatch('setCurrentSong', songs[currentIndex + 1]);
-            dispatch('togglePlay');
+            console.log(state.currentPlaylist);
+            dispatch('setCurrentSong', {song: songs[currentIndex + 1], playlist: state.currentPlaylist.playlistObject});
         };
     },
     currentTimeCounting({state, commit}) {
