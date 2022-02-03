@@ -1,5 +1,6 @@
 import songService from '@/services/songService';
 import playlistService from "@/services/playlistService";
+import localStorageService from '@/services/localStorageService'
 
 export default {
     setCurrentSong({commit, state, dispatch}, {song, playlist}) {
@@ -94,6 +95,7 @@ export default {
     },
     changeVolume({state, commit}, volume) {
         if (state.currentSong.element) state.currentSong.element.volume = volume;
+        localStorageService.setVolume(volume);
         commit('SET_VOLUME', volume);
     }
 }

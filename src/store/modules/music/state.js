@@ -1,3 +1,5 @@
+import localStorageService from '@/services/localStorageService';
+
 export default {
     currentSong: {
         durationSeconds: 0,
@@ -10,6 +12,6 @@ export default {
         playlistObject: {},
     },
     playlistsOnMain: [],
-    volume: 1,
+    volume: localStorageService.getVolume(),
     songs: [],
 }
