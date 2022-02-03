@@ -12,27 +12,13 @@
 
 <script>
 import NotificationItem from "@/components/ui/NotificationItem";
+import { mapState } from 'vuex'
 
 export default {
   name: "NotificationList",
   components: {NotificationItem},
-  data() {
-    return {
-      notifications: [
-        {
-          error: true,
-          text: 'Some error omg'
-        },
-        {
-          error: true,
-          text: 'Some big big big big big big big big big big big big big big big error omg'
-        },
-        {
-          error: false,
-          text: 'Some not error omg'
-        },
-      ]
-    }
+  computed: {
+    ...mapState('notification', ['notifications'])
   }
 }
 </script>
