@@ -2,15 +2,17 @@
   <div class="container">
     <router-view/>
   </div>
-  <MusicController></MusicController>
+  <NotificationList/>
+  <MusicController/>
 </template>
 
 <script>
 import MusicController from "@/components/MusicController";
+import NotificationList from "@/components/ui/NotificationList";
 
 export default {
   name: "App",
-  components: {MusicController},
+  components: {MusicController, NotificationList},
 }
 </script>
 
