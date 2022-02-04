@@ -5,7 +5,7 @@
     </div>
     <div class="music-controller__lower-block">
       <div class="music-controller__buttons">
-        <QueueButton :rotate="true"/>
+        <QueueButton :previous="true"/>
         <PlayButton
             :paused="currentSong.paused || currentSong.ended"
             :song="currentSong"

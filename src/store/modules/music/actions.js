@@ -84,7 +84,6 @@ export default {
                 commit('SET_SONG_END', true);
                 return null;
             }
-            console.log(state.currentPlaylist);
             dispatch('setCurrentSong', {song: songs[currentIndex + 1], playlist: state.currentPlaylist.playlistObject});
         };
     },
@@ -103,5 +102,25 @@ export default {
         if (state.currentSong.element) state.currentSong.element.volume = volume;
         localStorageService.setVolume(volume);
         commit('SET_VOLUME', volume);
+    },
+    changeQueueSong({state, commit, dispatch}, previous) {
+        const playlist = state.currentPlaylist;
+        const songs = playlist.playlistObject.songs;
+        const currentIndex = playlist.currentSongIndex;
+
+        if (previous) {
+            if (currentIndex - 1 < 0 || state.currentSong.currentTimeSeconds > 10) {
+                dispatch('setSongTime', 0);
+                return null;
+            }
+            dispatch('setCurrentSong', {song: songs[currentIndex - 1], playlist: playlist.playlistObject});
+            return null;
+        }
+
+        if (songs.length - 1 === currentIndex) {
+            dispatch('setCurrentSong', {song: songs[0], playlist: playlist.playlistObject});
+            return null;
+        }
+        dispatch('setCurrentSong', {song: songs[currentIndex + 1], playlist: playlist.playlistObject});
     }
 }
