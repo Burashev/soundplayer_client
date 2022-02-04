@@ -5,7 +5,12 @@
     </div>
     <div class="music-controller__lower-block">
       <div class="music-controller__buttons">
-        <PlayButton :paused="currentSong.paused || currentSong.ended" :song="currentSong"></PlayButton>
+        <QueueButton :rotate="true"/>
+        <PlayButton
+            :paused="currentSong.paused || currentSong.ended"
+            :song="currentSong"
+        />
+        <QueueButton/>
       </div>
       <span class="music-controller__duration">{{ songCurrentTime }} / {{ songDuration }}</span>
       <div class="music-controller__volume">
@@ -13,7 +18,7 @@
         <div class="music-controller__volume-bar" @mouseleave="volumeBarHide" @mouseenter="volumeBarShow" v-show="isVolumeBarShow">
           <div class="music-controller__volume-bar__progress" @mousedown="changeVolume"></div>
         </div>
-        <SpeakerButton size="30" @mouseenter="volumeBarShow"></SpeakerButton>
+        <SpeakerButton size="30" @mouseenter="volumeBarShow"/>
       </div>
     </div>
   </div>
@@ -23,6 +28,7 @@
 import PlayButton from "@/components/ui/PlayButton";
 import SpeakerButton from "@/components/ui/SpeakerButton";
 import {mapState, mapGetters} from 'vuex'
+import QueueButton from "@/components/ui/QueueButton";
 
 export default {
   name: "MusicController",
@@ -31,7 +37,7 @@ export default {
       isVolumeBarShow: false,
     }
   },
-  components: {PlayButton, SpeakerButton},
+  components: {PlayButton, SpeakerButton, QueueButton},
   computed: {
     ...mapState("music", ["currentSong"]),
     ...mapGetters("music", ["songDuration", "songCurrentTime", "getVolume", "songPercent"]),
@@ -93,6 +99,11 @@ export default {
 
   &__buttons {
     margin-right: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    //width: 140px;
+    column-gap: 40px;
   }
 
   &__duration {

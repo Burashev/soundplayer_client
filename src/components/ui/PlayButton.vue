@@ -1,8 +1,9 @@
 <template>
-  <a href="#" @click.prevent="buttonClick">
+  <div @click.prevent="buttonClick" class="play-button">
     <svg
         xmlns="http://www.w3.org/2000/svg"
         :width="size"
+        :height="size"
         viewBox="0 0 277.338 277.338"
         :fill="color"
         v-if="!paused"
@@ -16,6 +17,7 @@
     <svg
         xmlns="http://www.w3.org/2000/svg"
         :width="size"
+        :height="size"
         viewBox="0 0 24 24"
         :fill="color"
         class="triangle"
@@ -26,7 +28,7 @@
     </svg>
 
 
-  </a>
+  </div>
 </template>
 
 <script>
@@ -69,5 +71,8 @@ export default {
 <style lang="scss" scoped>
 .triangle {
   transform: rotate(90deg);
+}
+.play-button {
+  cursor: pointer;;
 }
 </style>
