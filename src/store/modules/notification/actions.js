@@ -6,6 +6,6 @@ export default {
 
         setTimeout(() => {
             commit('REMOVE_NOTIFICATION', notification.id);
-        }, 2000)
+        }, 3000)
     }
 }

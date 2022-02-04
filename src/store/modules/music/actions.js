@@ -67,6 +67,12 @@ export default {
                 commit('SET_SONG_PAUSE', false);
                 commit('SET_SONG_END', false);
                 dispatch('currentTimeCounting');
+            })
+            .catch((error) => {
+                this.dispatch('notification/createNotification', {
+                    text: error,
+                    error: true
+                })
             });
 
         state.currentSong.element.onended = () => {
