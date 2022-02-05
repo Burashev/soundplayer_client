@@ -108,6 +108,8 @@ export default {
         const songs = playlist.playlistObject.songs;
         const currentIndex = playlist.currentSongIndex;
 
+        if (!playlist.playlistObject.songs) return null;
+
         if (previous) {
             if (currentIndex - 1 < 0 || state.currentSong.currentTimeSeconds > 10) {
                 dispatch('setSongTime', 0);
@@ -118,6 +120,10 @@ export default {
         }
 
         if (songs.length - 1 === currentIndex) {
+            if (songs.length === 1) {
+                dispatch('setSongTime', state.currentSong.durationSeconds);
+                return null;
+            }
             dispatch('setCurrentSong', {song: songs[0], playlist: playlist.playlistObject});
             return null;
         }
