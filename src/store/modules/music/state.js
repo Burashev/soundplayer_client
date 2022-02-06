@@ -13,5 +13,6 @@ export default {
     },
     playlistsOnMain: [],
     volume: localStorageService.getVolume(),
+    previousVolume: 1,
     songs: [],
 }

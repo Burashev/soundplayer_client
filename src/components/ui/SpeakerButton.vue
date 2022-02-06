@@ -1,5 +1,5 @@
 <template>
-  <a href="#">
+  <div class="speaker-button">
     <svg
         xmlns="http://www.w3.org/2000/svg"
         :width="size"
@@ -13,7 +13,7 @@
       <path d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6"
             style="fill: none;"/>
     </svg>
-  </a>
+  </div>
 </template>
 
 <script>
@@ -32,6 +32,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.speaker-button {
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+}
 </style>

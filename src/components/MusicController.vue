@@ -18,7 +18,7 @@
         <div class="music-controller__volume-bar" @mouseleave="volumeBarHide" @mouseenter="volumeBarShow" v-show="isVolumeBarShow">
           <div class="music-controller__volume-bar__progress" @mousedown="changeVolume"></div>
         </div>
-        <SpeakerButton size="30" @mouseenter="volumeBarShow"/>
+        <SpeakerButton size="30" @click="toggleVolume" @mouseenter="volumeBarShow" @mouseleave="volumeBarHide"/>
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@ export default {
   },
   components: {PlayButton, SpeakerButton, QueueButton},
   computed: {
-    ...mapState("music", ["currentSong"]),
+    ...mapState("music", ["currentSong", "volume"]),
     ...mapGetters("music", ["songDuration", "songCurrentTime", "getVolume", "songPercent"]),
   },
   methods: {
@@ -57,7 +57,11 @@ export default {
       const coords = e.target.getBoundingClientRect();
       const yCoord = coords.bottom - e.clientY;
       const volume = yCoord / coords.height; // from one to zero
-      this.$store.dispatch('music/changeVolume', volume);
+      this.$store.dispatch('music/changeVolume', {volume});
+    },
+    toggleVolume() {
+      if (!this.volume) this.$store.dispatch('music/changeVolume', {previous: true});
+      else this.$store.dispatch('music/changeVolume', {volume: 0});
     }
   }
 
@@ -118,7 +122,6 @@ export default {
       width: 100%;
       height: 93px;
       bottom: 0;
-      pointer-events: none;
     }
     &-bar {
       height: 160px;
