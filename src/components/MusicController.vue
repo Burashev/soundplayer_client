@@ -18,7 +18,7 @@
         <div class="music-controller__volume-bar" @mouseleave="volumeBarHide" @mouseenter="volumeBarShow" v-show="isVolumeBarShow">
           <div class="music-controller__volume-bar__progress" @mousedown="changeVolume"></div>
         </div>
-        <SpeakerButton size="30" @click="toggleVolume" @mouseenter="volumeBarShow" @mouseleave="volumeBarHide"/>
+        <SpeakerButton size="30" @click="toggleVolume" @mouseenter="volumeBarShow" @mouseleave="volumeBarHide" :buttonStatus="speakerButtonStatus"/>
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@ export default {
   components: {PlayButton, SpeakerButton, QueueButton},
   computed: {
     ...mapState("music", ["currentSong", "volume"]),
-    ...mapGetters("music", ["songDuration", "songCurrentTime", "getVolume", "songPercent"]),
+    ...mapGetters("music", ["songDuration", "songCurrentTime", "getVolume", "songPercent", "speakerButtonStatus"]),
   },
   methods: {
     progressClick(e) {

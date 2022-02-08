@@ -1,17 +1,28 @@
 <template>
   <div class="speaker-button">
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        :width="size"
-        :height="size"
-        viewBox="0 0 75 75"
-        style="stroke-width: 5; stroke-linejoin:round"
-        :style="{stroke: color, fill: color}"
+    <svg xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 23 17.27"
+         :width="size"
+         :height="size"
+         style="stroke-width: 1.6px; stroke-linejoin:round"
+         :style="{stroke: color, fill: color}"
     >
-      <path d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z"
-      />
-      <path d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6"
-            style="fill: none;"/>
+      <g v-if="buttonStatus === 4">
+        <path d="M12.6,4.41,7.12,9.15H1.92v6.11H7l5.56,4.82Z" transform="translate(-1.12 -3.61)"/>
+        <path d="M15.36,8.83a6.26,6.26,0,0,1,0,6.85m2.27-9.12a9.59,9.59,0,0,1,0,11.39M19.71,4.48a12.41,12.41,0,0,1,0,15.55" transform="translate(-1.12 -3.61)" style="fill: none"/>
+      </g>
+      <g v-else-if="buttonStatus === 3">
+        <path d="M12.6,4.41,7.12,9.15H1.92v6.11H7l5.56,4.82Z" transform="translate(-1.12 -3.61)"/>
+        <path d="M15.36,8.83a6.26,6.26,0,0,1,0,6.85m2.27-9.12a9.59,9.59,0,0,1,0,11.39" transform="translate(-1.12 -3.61)"
+              style="fill: none;"/>
+      </g>
+      <g v-else-if="buttonStatus === 2">
+        <path d="M12.6,4.41,7.12,9.15H1.92v6.11H7l5.56,4.82Z" transform="translate(-1.12 -3.61)"/>
+        <path d="M15.36,8.83a6.26,6.26,0,0,1,0,6.85" transform="translate(-1.12 -3.61)" style="fill: none;"/>
+      </g>
+      <g v-else>
+        <path d="M12.6,4.41,7.12,9.15H1.92v6.11H7l5.56,4.82Z" transform="translate(-1.12 -3.61)" style="stroke-linejoin: round;"/>
+      </g>
     </svg>
   </div>
 </template>
@@ -27,6 +38,10 @@ export default {
     color: {
       type: String,
       default: '#fff'
+    },
+    buttonStatus: {
+      type: Number,
+      default: 4
     }
   }
 }
