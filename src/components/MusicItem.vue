@@ -1,15 +1,15 @@
 <template>
-  <div class="music-item">
+  <div class="music-item" :class="{'active': isCurrentSong}">
     <div class="music-item__cover">
       <div class="music-item__cover__bg-cover"></div>
-      <a class="music-item__cover__play-btn" href="#">
+      <div class="music-item__cover__play-btn">
         <PlayButton
             :paused="isPaused"
             size="17"
             :song="song"
             :playlist="playlist"
         />
-      </a>
+      </div>
       <img :src="song.cover" :alt="'The cover of the song ' + song.title">
     </div>
     <div class="music-item__text">
@@ -43,8 +43,10 @@ export default {
   computed: {
     ...mapState('music', ['currentSong']),
     isPaused() {
-      if (this.song.id === this.currentSong.id) return this.currentSong.paused;
-      return true;
+      return this.isCurrentSong ? this.currentSong.paused : true;
+    },
+    isCurrentSong() {
+      return this.song.id === this.currentSong.id;
     },
     songDuration() {
       return timeFormat(this.song.durationSeconds);
@@ -60,6 +62,16 @@ export default {
   border: 2px solid transparent;
   border-radius: 7px;
   padding: 10px;
+
+  $class: &;
+
+  &.active {
+    background-color: #2d2d2f;
+
+    #{$class}__cover__bg-cover, #{$class}__cover__play-btn {
+      opacity: 1;
+    }
+  }
 
   &__cover {
     max-width: 50px;
