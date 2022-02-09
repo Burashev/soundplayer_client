@@ -7,6 +7,14 @@ const routes = [
         name: 'Index',
         component: Index
     },
+    {
+        path: '/auth',
+        redirect: '/',
+    },
+    {
+        path: '/auth/github',
+        component: () => import('@/views/Auth')
+    }
 ]
 
 const router = createRouter({
