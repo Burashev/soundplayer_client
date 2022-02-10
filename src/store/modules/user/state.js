@@ -1,4 +1,5 @@
+import localStorageService from "@/services/localStorageService";
 export default {
-    userToken: '',
+    userToken: localStorageService.getToken(),
     userObject: null
 }

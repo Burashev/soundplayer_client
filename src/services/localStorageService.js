@@ -4,5 +4,11 @@ export default {
     },
     setVolume(volume) {
         localStorage.setItem('volume', volume)
+    },
+    setToken(token) {
+        localStorage.setItem('token', token);
+    },
+    getToken() {
+        return localStorage.getItem('token') ?? '';
     }
 }
