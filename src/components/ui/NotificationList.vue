@@ -33,6 +33,7 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  z-index: 200;
 }
 
 .list-enter-active,
