@@ -26,12 +26,12 @@ export default {
 .notification {
   min-width: 200px;
   max-width: 300px;
-  background-color: #424244;
+  background-color: #34c738;
   display: flex;
   justify-content: center;
   padding: 15px;
   border-radius: 7px;
-  color: #bebebe;
+  color: white;
   margin-bottom: 10px;
   cursor: pointer;
   &.error {

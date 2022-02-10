@@ -3,13 +3,13 @@
 </template>
 
 <script>
-import authService from "@/services/authService";
 export default {
   name: "Auth",
   created() {
     const code = this.$route.query.code;
     if (code) {
-      authService.callbackGithub(code);
+      this.$store.dispatch('user/getUserByCode', code);
+      this.$router.push({name: 'Index'});
     }
   }
 }

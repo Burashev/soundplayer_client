@@ -5,7 +5,7 @@
     </template>
     <template v-slot:body>
       <div class="auth-service-list">
-        <div class="auth-service-list__item">
+        <div class="auth-service-list__item" @click="redirect('github')">
           <div class="auth-service-list__item__icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.58 31.77" height="35" style="fill: white">
               <path class="cls-1"
@@ -45,10 +45,21 @@
 
 <script>
 import ModalApp from "@/components/ui/ModalApp";
+import authService from "@/services/authService";
 
 export default {
   name: "ModalAuth",
-  components: {ModalApp}
+  components: {ModalApp},
+  methods: {
+    redirect(social) {
+      if (social === 'github') {
+        authService.redirectGithub().then((data) => {
+          const link = data.data.link;
+          window.open(link, '_blank')
+        })
+      }
+    }
+  }
 }
 </script>
 
