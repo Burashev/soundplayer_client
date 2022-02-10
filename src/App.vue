@@ -1,18 +1,17 @@
 <template>
-  <div class="container">
+  <app-layout>
     <router-view/>
-  </div>
+  </app-layout>
   <NotificationList/>
-  <MusicController/>
 </template>
 
 <script>
-import MusicController from "@/components/MusicController";
 import NotificationList from "@/components/ui/NotificationList";
+import AppLayout from "@/layouts/AppLayout";
 
 export default {
   name: "App",
-  components: {MusicController, NotificationList},
+  components: {NotificationList, AppLayout},
 }
 </script>
 
