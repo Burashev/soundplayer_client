@@ -2,7 +2,7 @@
   <app-layout>
     <router-view/>
   </app-layout>
-  <NotificationList/>
+  <notification-list/>
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template>
   <div class="music-playlist">
     <h1 class="music-playlist__title">{{ playlist.title }}</h1>
-    <MusicList :songs="playlist.songs" :playlist="playlist"></MusicList>
+    <music-list :songs="playlist.songs" :playlist="playlist"/>
   </div>
 </template>
 

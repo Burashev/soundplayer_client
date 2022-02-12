@@ -3,7 +3,7 @@
   <div class="container">
     <slot/>
   </div>
-  <MusicController/>
+  <music-controller/>
 </template>
 
 <script>

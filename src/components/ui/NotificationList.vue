@@ -1,7 +1,7 @@
 <template>
   <div class="notification__list">
     <transition-group name="list" tag="div">
-      <NotificationItem v-for="notification in notifications"
+      <notification-item v-for="notification in notifications"
                         :text="notification.text"
                         :error="notification.error"
                         :key="notification.text"

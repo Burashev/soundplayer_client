@@ -5,12 +5,12 @@
     </div>
     <div class="music-controller__lower-block">
       <div class="music-controller__buttons">
-        <QueueButton :previous="true"/>
-        <PlayButton
+        <queue-button :previous="true"/>
+        <play-button
             :paused="currentSong.paused || currentSong.ended"
             :song="currentSong"
         />
-        <QueueButton/>
+        <queue-button/>
       </div>
       <span class="music-controller__duration">{{ songCurrentTime }} / {{ songDuration }}</span>
       <div class="music-controller__volume">
@@ -18,7 +18,7 @@
         <div class="music-controller__volume-bar" @mouseleave="volumeBarHide" @mouseenter="volumeBarShow" v-show="isVolumeBarShow">
           <div class="music-controller__volume-bar__progress" @mousedown="changeVolume"></div>
         </div>
-        <SpeakerButton size="30" @click="toggleVolume" @mouseenter="volumeBarShow" @mouseleave="volumeBarHide" :buttonStatus="speakerButtonStatus"/>
+        <speaker-button size="30" @click="toggleVolume" @mouseenter="volumeBarShow" @mouseleave="volumeBarHide" :buttonStatus="speakerButtonStatus"/>
       </div>
     </div>
   </div>

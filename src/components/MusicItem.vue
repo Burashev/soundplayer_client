@@ -3,7 +3,7 @@
     <div class="music-item__cover">
       <div class="music-item__cover__bg-cover"></div>
       <div class="music-item__cover__play-btn">
-        <PlayButton
+        <play-button
             :paused="isPaused"
             size="17"
             :song="song"

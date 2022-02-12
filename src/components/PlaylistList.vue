@@ -1,5 +1,5 @@
 <template>
-  <PlaylistItem v-for="playlist in playlists" :playlist="playlist" :key="playlist.id"/>
+  <playlist-item v-for="playlist in playlists" :playlist="playlist" :key="playlist.id"/>
 </template>
 
 <script>
