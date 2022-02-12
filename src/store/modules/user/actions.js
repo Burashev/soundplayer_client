@@ -14,8 +14,8 @@ export default {
                 this.dispatch('notification/createNotification', {text: 'Successful login'})
             })
     },
-    getUser({state, commit}) {
-        if (!state.userToken) return null;
+    getUser({state, getters, commit}) {
+        if (!getters.isAuth) return null;
 
         userService.getProfileData(state.userToken)
             .then(res => {
