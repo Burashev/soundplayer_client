@@ -1,8 +1,10 @@
 import { apiClient } from "@/services/apiClient";
 
 export default {
-    getProfileData() {
-        return apiClient.get('/user/me')
+    getProfileData(token) {
+        return apiClient.get('/user/me', {
+            'headers': {'Authorization': `Bearer ${token}`}
+        })
     },
 
 }

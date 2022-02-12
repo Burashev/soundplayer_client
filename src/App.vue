@@ -12,6 +12,11 @@ import AppLayout from "@/layouts/AppLayout";
 export default {
   name: "App",
   components: {NotificationList, AppLayout},
+  created() {
+    setInterval(() => {
+      this.$store.dispatch('user/getUser');
+    }, 4000);
+  }
 }
 </script>
 
