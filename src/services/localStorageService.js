@@ -10,5 +10,11 @@ export default {
     },
     getToken() {
         return localStorage.getItem('token') ?? '';
+    },
+    setUserObject(userObject) {
+        localStorage.setItem('userObject', JSON.stringify(userObject))
+    },
+    getUserObject() {
+        return JSON.parse(localStorage.getItem('userObject'))
     }
 }

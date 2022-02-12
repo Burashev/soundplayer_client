@@ -15,7 +15,7 @@ export default {
   created() {
     setInterval(() => {
       this.$store.dispatch('user/getUser');
-    }, 4000);
+    }, 5000);
   }
 }
 </script>
