@@ -1,3 +1,4 @@
 export default {
-    isOpen: true,
+    modals: ['ModalAuth'],
+    openedModal: ''
 }

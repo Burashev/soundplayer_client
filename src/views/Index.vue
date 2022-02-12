@@ -1,20 +1,21 @@
 <template>
   <playlist-list :playlists="playlistsOnMain"/>
-  <modal-auth v-if="isOpen"/>
+  <modal-show v-if="openedModal" :modal-name="openedModal"/>
 </template>
 
 <script>
 import MusicList from "@/components/MusicList";
 import PlaylistList from "@/components/PlaylistList";
 import {mapState} from "vuex";
-import ModalAuth from "@/components/ui/ModalAuth";
+import ModalShow from "@/components/modals/ModalShow";
 
 export default {
   name: "Index",
-  components: {MusicList, PlaylistList, ModalAuth},
+  components: {MusicList, PlaylistList, ModalShow},
   computed: {
     ...mapState('music', ['songs', 'playlistsOnMain']),
-    ...mapState('modal', ['isOpen'])
+    ...mapState('modal', ['openedModal']),
+    // ...mapState('modal', ['isOpen'])
   },
   created() {
     // this.$store.dispatch('music/loadSongs');

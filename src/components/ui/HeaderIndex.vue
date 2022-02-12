@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div v-if="!isAuth" class="header__btn" @click="">Sign in</div>
+    <div v-if="!isAuth" class="header__btn" @click="$store.dispatch('modal/openModal', 'ModalAuth')">Sign in</div>
     <div v-else class="header__user-info">
       <img class="header__user-info__avatar" :src="userObject.avatar" alt="User avatar">
       <span class="header__user-info__nickname">{{ userObject.nickname }}</span>

@@ -21,7 +21,7 @@ export default {
   name: "ModalApp",
   methods: {
     closeModal() {
-      this.$store.dispatch('modal/toggleIsOpen');
+      this.$store.dispatch('modal/closeModal');
     }
   }
 }

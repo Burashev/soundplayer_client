@@ -1,5 +1,4 @@
 <template>
-  <h1>default</h1>
   <slot/>
 </template>
 

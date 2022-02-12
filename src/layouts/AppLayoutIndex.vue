@@ -11,6 +11,7 @@ import MusicController from "@/components/MusicController";
 import {mapGetters, mapState} from "vuex";
 import HeaderIndex from "@/components/ui/HeaderIndex";
 
+
 export default {
   name: "AppLayoutIndex",
   components: {MusicController, HeaderIndex},

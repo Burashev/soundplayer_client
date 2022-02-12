@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import ModalApp from "@/components/ui/ModalApp";
+import ModalApp from "./ModalApp";
 import authService from "@/services/authService";
 
 export default {
