@@ -98,11 +98,11 @@ export default {
         state.currentSong.element.currentTime = time;
         commit('SET_SONG_CURRENT_TIME_SECONDS', time);
     },
-    changeVolume({state, commit}, {volume, previous = false}) {
+    changeVolume({state, commit}, {volume = 1, previous = false}) {
         if (previous) {
             volume = state.previousVolume;
         }
-        state.previousVolume = state.volume;
+        if (!volume) state.previousVolume = state.volume;
         if (state.currentSong.element) state.currentSong.element.volume = volume;
         localStorageService.setVolume(volume);
         commit('SET_VOLUME', volume);

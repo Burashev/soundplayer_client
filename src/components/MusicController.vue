@@ -14,11 +14,18 @@
       </div>
       <span class="music-controller__duration">{{ songCurrentTime }} / {{ songDuration }}</span>
       <div class="music-controller__volume">
-        <div class="music-controller__volume__over" @mouseleave="volumeBarHide" @mouseenter="volumeBarShow" v-show="isVolumeBarShow"></div>
-        <div class="music-controller__volume-bar" @mouseleave="volumeBarHide" @mouseenter="volumeBarShow" v-show="isVolumeBarShow">
-          <div class="music-controller__volume-bar__progress" @mousedown="changeVolume"></div>
+        <div class="music-controller__volume__over" @mouseleave="volumeBarHide" @mouseenter="volumeBarShow"
+             v-show="isVolumeBarShow"></div>
+        <div class="music-controller__volume-bar" @mouseleave="volumeBarHide" @mouseenter="volumeBarShow"
+             v-show="isVolumeBarShow">
+          <div class="music-controller__volume-bar__progress"
+               @mousedown="volumeProgressDown"
+               @mousemove="volumeProgressMove"
+               @mouseup="volumeProgressMouseDown = false"
+          ></div>
         </div>
-        <speaker-button size="30" @click="toggleVolume" @mouseenter="volumeBarShow" @mouseleave="volumeBarHide" :buttonStatus="speakerButtonStatus"/>
+        <speaker-button size="30" @click="toggleVolume" @mouseenter="volumeBarShow" @mouseleave="volumeBarHide"
+                        :buttonStatus="speakerButtonStatus"/>
       </div>
     </div>
   </div>
@@ -35,6 +42,7 @@ export default {
   data() {
     return {
       isVolumeBarShow: false,
+      volumeProgressMouseDown: false,
     }
   },
   components: {PlayButton, SpeakerButton, QueueButton},
@@ -52,8 +60,14 @@ export default {
     },
     volumeBarHide() {
       this.isVolumeBarShow = false;
+      this.volumeProgressMouseDown = false;
     },
-    changeVolume(e) {
+    volumeProgressDown(e) {
+      this.volumeProgressMouseDown = true
+      this.volumeProgressMove(e);
+    },
+    volumeProgressMove(e) {
+      if (!this.volumeProgressMouseDown) return null;
       const coords = e.target.getBoundingClientRect();
       const yCoord = coords.bottom - e.clientY;
       const volume = yCoord / coords.height; // from one to zero
@@ -117,12 +131,14 @@ export default {
 
   &__volume {
     position: relative;
+
     &__over {
       position: absolute;
       width: 100%;
       height: 93px;
       bottom: 0;
     }
+
     &-bar {
       height: 160px;
       width: 40px;
