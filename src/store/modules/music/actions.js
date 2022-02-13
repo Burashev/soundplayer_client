@@ -89,7 +89,7 @@ export default {
     },
     currentTimeCounting({state, commit}) {
         const interval = setInterval(() => {
-            if (state.currentSong.ended) clearInterval(interval);
+            if (state.currentSong.ended || state.currentSong.paused) clearInterval(interval);
             commit('SET_SONG_CURRENT_TIME_SECONDS', state.currentSong.element.currentTime);
         }, 500)
     },
