@@ -20,6 +20,7 @@ export default {
         userService.getProfileData(state.userToken)
             .then(res => {
                 const userObject = res.data;
+                if (userObject.updated_at === state.userObject.updated_at) return null;
                 commit('SET_USER_OBJECT', userObject);
                 localStorageService.setUserObject(userObject);
             })
