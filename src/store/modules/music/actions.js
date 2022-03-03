@@ -12,6 +12,7 @@ export default {
         if (state.currentSong.id) {
             state.currentSong.element.pause();
             state.currentSong.element.currentTime = 0;
+            clearInterval(state.currentTimeCountingInterval);
         }
 
         const element = new Audio(song.source);
@@ -91,7 +92,8 @@ export default {
         const interval = setInterval(() => {
             if (state.currentSong.ended || state.currentSong.paused) clearInterval(interval);
             commit('SET_SONG_CURRENT_TIME_SECONDS', state.currentSong.element.currentTime);
-        }, 500)
+        }, 500);
+        commit('SET_CURRENT_TIME_COUNTING_INTERVAL', interval);
     },
     setSongTime({state, commit}, time) {
         if (state.currentSong.ended) return null;

@@ -5,9 +5,6 @@ export default {
     SET_CURRENT_PLAYLIST(state, playlist) {
         state.currentPlaylist = playlist;
     },
-    SET_SONG_DURATION_SECONDS(state, time) {
-        state.currentSong.durationSeconds = time;
-    },
     SET_SONG_PAUSE(state, isPause) {
         state.currentSong.paused = isPause
     },
@@ -25,5 +22,8 @@ export default {
     },
     SET_MAIN_PLAYLISTS(state, playlists) {
         state.playlistsOnMain = playlists
+    },
+    SET_CURRENT_TIME_COUNTING_INTERVAL(state, interval) {
+        state.currentTimeCountingInterval = interval;
     }
 }

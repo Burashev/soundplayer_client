@@ -15,4 +15,5 @@ export default {
     volume: localStorageService.getVolume(),
     previousVolume: 1,
     songs: [],
+    currentTimeCountingInterval: null,
 }
