@@ -1,9 +1,16 @@
 <template>
   <header class="header">
-    <div v-if="!isAuth" class="header__btn" @click="$store.dispatch('modal/openModal', 'ModalAuth')">Sign in</div>
-    <div v-else class="header__user-info">
-      <img class="header__user-info__avatar" :src="userObject.avatar" alt="User avatar">
-      <span class="header__user-info__nickname">{{ userObject.nickname }}</span>
+    <div class="header__logo"></div>
+    <ul class="header__menu">
+      <li class="active">Home</li>
+      <li>Library</li>
+    </ul>
+    <div class="header__user">
+      <div v-if="!isAuth" class="header__btn" @click="$store.dispatch('modal/openModal', 'ModalAuth')">Sign in</div>
+      <div v-else class="header__user-info">
+        <img class="header__user-info__avatar" :src="userObject.avatar" alt="User avatar">
+        <span class="header__user-info__nickname">{{ userObject.nickname }}</span>
+      </div>
     </div>
   </header>
 </template>
@@ -27,8 +34,32 @@ export default {
 <style lang="scss" scoped>
 .header {
   display: flex;
-  flex-direction: row-reverse;
-  padding: 20px 50px;
+  padding: 0 50px;
+  position: relative;
+  height: 70px;
+  align-items: center;
+  justify-content: space-between;
+  &__logo {
+    width: 140px;
+  }
+  &__menu {
+    display: flex;
+    list-style: none;
+    gap: 60px;
+    align-items: center;
+    li {
+      font-weight: 500;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #bebebe;
+      &.active {
+        color: white;
+      }
+      &:hover {
+        color: white;
+      }
+    }
+  }
 
   &__btn {
     padding: 15px 25px;
@@ -38,29 +69,32 @@ export default {
     cursor: pointer;
     font-weight: 500;
   }
+  &__user {
 
-  &__user-info {
-    max-width: 170px;
-    width: auto;
-    background-color: #424244;
-    padding: 5px 15px;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
+    &-info {
+      max-width: 170px;
+      width: auto;
+      background-color: #424244;
+      padding: 5px 15px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
 
-    &__avatar {
-      width: 32px;
-      height: 32px;
-      object-fit: cover;
-      border-radius: 50%;
-    }
+      &__avatar {
+        width: 32px;
+        height: 32px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
 
-    &__nickname {
-      color: white;
+      &__nickname {
+        color: white;
+      }
     }
   }
+
 
 }
 </style>
