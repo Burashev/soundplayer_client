@@ -16,6 +16,14 @@ const routes = [
     {
         path: '/auth/github',
         component: () => import('@/views/Auth')
+    },
+    {
+        path: '/library',
+        name: 'Library',
+        component: () => import('@/views/Library'),
+        meta: {
+            layout: 'AppLayoutIndex'
+        }
     }
 ]
 

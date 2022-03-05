@@ -2,8 +2,8 @@
   <header class="header">
     <div class="header__logo"></div>
     <ul class="header__menu">
-      <li class="active">Home</li>
-      <li>Library</li>
+      <li :class="{'active': this.$route.name === 'Index'}" @click="$router.push('/')">Home</li>
+      <li :class="{'active': this.$route.name === 'Library'}" @click="$router.push('/library')">Library</li>
     </ul>
     <div class="header__user">
       <div v-if="!isAuth" class="header__btn" @click="$store.dispatch('modal/openModal', 'ModalAuth')">Sign in</div>
@@ -27,7 +27,7 @@ export default {
       type: [Object, null],
       required: true
     }
-  }
+  },
 }
 </script>
 
