@@ -1,4 +1,5 @@
 import {createRouter, createWebHistory} from 'vue-router'
+import store from '@/store'
 
 const routes = [
     {
@@ -22,7 +23,8 @@ const routes = [
         name: 'Library',
         component: () => import('@/views/Library'),
         meta: {
-            layout: 'AppLayoutIndex'
+            layout: 'AppLayoutIndex',
+            isAuth: true
         }
     }
 ]
@@ -30,6 +32,16 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes
+})
+
+router.beforeEach((to, from) => {
+    if (to.meta.isAuth && !store.getters["user/isAuth"]) {
+        store.dispatch('notification/createNotification', {
+            text: 'You need to log in',
+            error: true
+        })
+        return {name: 'Index'}
+    }
 })
 
 export default router
