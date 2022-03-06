@@ -18,17 +18,21 @@
         <a href="#">{{ song.author.name }}</a>
       </p>
     </div>
+    <div class="music-item__like">
+      <like-button/>
+    </div>
     <span class="music-item__duration">{{ songDuration }}</span>
   </div>
 </template>
 
 <script>
 import PlayButton from "@/components/ui/PlayButton";
+import LikeButton from "@/components/ui/LikeButton";
 import {mapState} from "vuex";
 import {timeFormat} from "@/services/utils"
 
 export default {
-  components: {PlayButton},
+  components: {PlayButton, LikeButton},
   name: "MusicItem",
   props: {
     song: {
@@ -148,6 +152,14 @@ export default {
 
   &__duration {
     color: #bebebe;
+  }
+
+  &__like {
+    margin-right: 20px;
+    display: none;
+    #{$class}:hover &{
+      display: block;
+    }
   }
 }
 </style>
