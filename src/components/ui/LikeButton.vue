@@ -18,10 +18,15 @@ export default {
       type: String,
       default: '18',
     },
-    color: {
-      type: String,
-      default: '#bebebe'
+    isLiked: {
+      type: Boolean,
+      required: true
     },
+  },
+  computed: {
+    color() {
+      return this.isLiked ? '#ff3c3c' : '#bebebe'
+    }
   }
 }
 </script>

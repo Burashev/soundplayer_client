@@ -18,8 +18,8 @@
         <a href="#">{{ song.author.name }}</a>
       </p>
     </div>
-    <div class="music-item__like">
-      <like-button/>
+    <div class="music-item__like" :class="{'active' : isLiked}">
+      <like-button :is-liked="isLiked"/>
     </div>
     <span class="music-item__duration">{{ songDuration }}</span>
   </div>
@@ -28,8 +28,8 @@
 <script>
 import PlayButton from "@/components/ui/PlayButton";
 import LikeButton from "@/components/ui/LikeButton";
-import {mapState} from "vuex";
-import {timeFormat} from "@/services/utils"
+import {mapState, mapGetters} from "vuex";
+import {timeFormat} from "@/services/utils";
 
 export default {
   components: {PlayButton, LikeButton},
@@ -46,6 +46,7 @@ export default {
   },
   computed: {
     ...mapState('music', ['currentSong']),
+    ...mapGetters('user', ['likedSongsIds', 'isAuth']),
     isPaused() {
       return this.isCurrentSong ? this.currentSong.paused : true;
     },
@@ -54,6 +55,9 @@ export default {
     },
     songDuration() {
       return timeFormat(this.song.durationSeconds);
+    },
+    isLiked() {
+      return this.isAuth ? this.likedSongsIds.includes(this.song.id) : false;
     }
   }
 }
@@ -157,7 +161,12 @@ export default {
   &__like {
     margin-right: 20px;
     display: none;
-    #{$class}:hover &{
+
+    #{$class}:hover & {
+      display: block;
+    }
+
+    &.active {
       display: block;
     }
   }

@@ -32,7 +32,6 @@ export default {
         dispatch('togglePlay');
     },
     setCurrentPlaylist({commit, state}, playlist) {
-        // if (playlist.id === state.currentPlaylist.playlistObject.id) return null;
         const currentSongIndex = playlist.songs.findIndex((song) => song.id === state.currentSong.id)
 
         const currentPlaylist = {
