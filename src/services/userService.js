@@ -6,5 +6,14 @@ export default {
             'headers': {'Authorization': `Bearer ${token}`}
         })
     },
-
+    likeSong(token, id) {
+        return apiClient.get(`/song/${id}/like`, {
+            'headers': {'Authorization': `Bearer ${token}`}
+        })
+    },
+    unlikeSong(token, id) {
+        return apiClient.get(`/song/${id}/unlike`, {
+            'headers': {'Authorization': `Bearer ${token}`}
+        })
+    }
 }

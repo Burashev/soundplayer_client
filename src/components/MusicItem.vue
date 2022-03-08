@@ -19,7 +19,7 @@
       </p>
     </div>
     <div class="music-item__like" :class="{'active' : isLiked}">
-      <like-button :is-liked="isLiked"/>
+      <like-button :is-liked="isLiked" :song-id="song.id"/>
     </div>
     <span class="music-item__duration">{{ songDuration }}</span>
   </div>
