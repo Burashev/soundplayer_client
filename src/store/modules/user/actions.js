@@ -36,7 +36,6 @@ export default {
     likeSong({state}, id) {
         userService.likeSong(state.userToken, id)
             .then()
-
     },
     unlikeSong({state}, id) {
         userService.unlikeSong(state.userToken, id)

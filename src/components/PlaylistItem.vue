@@ -1,12 +1,13 @@
 <template>
   <div class="music-playlist">
     <h1 class="music-playlist__title">{{ playlist.title }}</h1>
-    <music-list :songs="playlist.songs" :playlist="playlist"/>
+    <music-list :songs="playlist.songs" :playlist="playlist" :is-active-playlist="isActivePlaylist"/>
   </div>
 </template>
 
 <script>
 import MusicList from "@/components/MusicList";
+import {mapState} from "vuex";
 
 export default {
   name: "PlaylistItem",
@@ -17,7 +18,13 @@ export default {
       required: true
     }
   },
-
+  computed: {
+    ...mapState('music', ["currentPlaylist"]),
+    isActivePlaylist() {
+      if (!this.currentPlaylist) return false;
+      return this.currentPlaylist.playlistObject.id === this.playlist.id
+    }
+  }
 }
 </script>
 

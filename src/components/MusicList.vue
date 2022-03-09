@@ -1,6 +1,10 @@
 <template>
   <div class="music-list">
-    <music-item v-for="song in songs" :key="song.id" :song="song" :playlist="playlist"/>
+    <music-item v-for="song in songs"
+                :key="song.id"
+                :song="song"
+                :playlist="playlist"
+                :is-active-song="isActivePlaylist && song.id === currentSong.id"/>
   </div>
 </template>
 
@@ -18,7 +22,14 @@ export default {
     playlist: {
       type: Object,
       required: true
+    },
+    isActivePlaylist: {
+      type: Boolean,
+      required: true
     }
+  },
+  computed: {
+    ...mapState('music', ['currentSong'])
   }
 }
 </script>

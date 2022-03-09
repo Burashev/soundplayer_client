@@ -1,5 +1,5 @@
 <template>
-  <div class="music-item" :class="{'active': isCurrentSong}">
+  <div class="music-item" :class="{'active': isActiveSong}">
     <div class="music-item__cover">
       <div class="music-item__cover__bg-cover"></div>
       <div class="music-item__cover__play-btn">
@@ -42,16 +42,17 @@ export default {
     playlist: {
       type: Object,
       required: true
+    },
+    isActiveSong: {
+      type: Boolean,
+      required: true
     }
   },
   computed: {
     ...mapState('music', ['currentSong']),
     ...mapGetters('user', ['likedSongsIds', 'isAuth']),
     isPaused() {
-      return this.isCurrentSong ? this.currentSong.paused : true;
-    },
-    isCurrentSong() {
-      return this.song.id === this.currentSong.id;
+      return this.isActiveSong ? this.currentSong.paused : true;
     },
     songDuration() {
       return timeFormat(this.song.durationSeconds);
