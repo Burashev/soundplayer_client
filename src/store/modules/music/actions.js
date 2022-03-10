@@ -1,10 +1,10 @@
 import songService from '@/services/songService';
 import playlistService from "@/services/playlistService";
-import localStorageService from '@/services/localStorageService'
+import localStorageService from '@/services/localStorageService';
 
 export default {
     setCurrentSong({commit, state, dispatch}, {song, playlist}) {
-        if (song.id === state.currentSong.id && playlist.id === state.currentPlaylist.playlistObject.id) {
+        if (song.id === state.currentSong.id && (!playlist || playlist.id === state.currentPlaylist.playlistObject.id)) {
             dispatch('togglePlay');
             return null
         }

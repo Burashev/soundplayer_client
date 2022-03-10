@@ -33,12 +33,12 @@ export default {
                 }
             });
     },
-    likeSong({state}, id) {
+    likeSong({state, dispatch}, id) {
         userService.likeSong(state.userToken, id)
-            .then()
+            .then(() => dispatch('getUser'))
     },
-    unlikeSong({state}, id) {
+    unlikeSong({state, dispatch}, id) {
         userService.unlikeSong(state.userToken, id)
-            .then()
+            .then(() => dispatch('getUser'))
     }
 }

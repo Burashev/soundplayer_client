@@ -13,6 +13,16 @@
         <queue-button/>
       </div>
       <span class="music-controller__duration">{{ songCurrentTime }} / {{ songDuration }}</span>
+      <div class="music-controller__music" v-if="!currentSong.ended">
+        <img class="music-controller__music__cover" :src="currentSong.cover" :alt="currentSong.title + ' cover'"/>
+        <div class="music-controller__music__text">
+          <h4>{{ currentSong.title }}</h4>
+          <a href="#">{{ currentSong.author.name }}</a>
+        </div>
+        <div class="music-controller__music__like">
+          <like-button :is-liked="false" :song-id="currentSong.id"/>
+        </div>
+      </div>
       <div class="music-controller__volume">
         <div class="music-controller__volume__over" @mouseleave="volumeBarHide" @mouseenter="volumeBarShow"
              v-show="isVolumeBarShow"></div>
@@ -36,6 +46,7 @@ import PlayButton from "@/components/ui/PlayButton";
 import SpeakerButton from "@/components/ui/SpeakerButton";
 import {mapState, mapGetters} from 'vuex'
 import QueueButton from "@/components/ui/QueueButton";
+import LikeButton from "@/components/ui/LikeButton";
 
 export default {
   name: "MusicController",
@@ -45,7 +56,7 @@ export default {
       volumeProgressMouseDown: false,
     }
   },
-  components: {PlayButton, SpeakerButton, QueueButton},
+  components: {PlayButton, SpeakerButton, QueueButton, LikeButton},
   computed: {
     ...mapState("music", ["currentSong", "volume"]),
     ...mapGetters("music", ["songDuration", "songCurrentTime", "getVolume", "songPercent", "speakerButtonStatus"]),
@@ -113,6 +124,7 @@ export default {
     align-items: center;
     padding: 0 70px;
     height: 80px;
+    position: relative;
   }
 
   &__buttons {
@@ -171,6 +183,43 @@ export default {
           background-color: #ff3c3c;
         }
       }
+    }
+  }
+
+  &__music {
+    display: flex;
+    gap: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    &__cover {
+      width: 50px;
+      height: 50px;
+      border-radius: 7px;
+    }
+    &__text {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      h4 {
+        color: white;
+        letter-spacing: 0.01em;
+        max-width: 150px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      a {
+        color: #bebebe;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+    &__like {
+      display: flex;
+      align-items: center;
     }
   }
 }
