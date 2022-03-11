@@ -15,7 +15,7 @@
     <div class="music-item__text">
       <h4>{{ song.title }}</h4>
       <p>
-        <a href="#">{{ song.author.name }}</a>
+        <a :href="`/author/${song.author.id}`">{{ song.author.name }}</a>
       </p>
     </div>
     <div class="music-item__like" :class="{'active' : isLiked}">

@@ -26,6 +26,16 @@ const routes = [
             layout: 'AppLayoutIndex',
             isAuth: true
         }
+    },
+    {
+        path: '/author/:id',
+        name: 'Author',
+        component: () => import('@/views/Author'),
+        props: true,
+        meta: {
+            layout: 'AppLayoutIndex',
+            isAuth: false
+        }
     }
 ]
 
