@@ -20,7 +20,7 @@
           <a href="#">{{ currentSong.author.name }}</a>
         </div>
         <div class="music-controller__music__like">
-          <like-button :is-liked="false" :song-id="currentSong.id"/>
+          <like-button :is-liked="isLiked" :song-id="currentSong.id"/>
         </div>
       </div>
       <div class="music-controller__volume">
@@ -60,6 +60,10 @@ export default {
   computed: {
     ...mapState("music", ["currentSong", "volume"]),
     ...mapGetters("music", ["songDuration", "songCurrentTime", "getVolume", "songPercent", "speakerButtonStatus"]),
+    ...mapGetters('user', ['likedSongsIds', 'isAuth']),
+    isLiked() {
+      return this.isAuth ? this.likedSongsIds.includes(this.currentSong.id) : false;
+    }
   },
   methods: {
     progressClick(e) {
@@ -87,7 +91,7 @@ export default {
     toggleVolume() {
       if (!this.volume) this.$store.dispatch('music/changeVolume', {previous: true});
       else this.$store.dispatch('music/changeVolume', {volume: 0});
-    }
+    },
   }
 
 }
