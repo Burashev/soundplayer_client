@@ -3,7 +3,7 @@ export default {
         return !!state.userObject;
     },
     likedSongPlaylist(state) {
-        return state.userObject.likedSongs
+        return state.userObject?.likedSongs
     },
     likedSongsIds(state) {
         return state.userObject ? state.userObject.likedSongs.songs.map(song => song.id) : [];
