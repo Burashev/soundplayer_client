@@ -17,7 +17,7 @@
         <img class="music-controller__music__cover" :src="currentSong.cover" :alt="currentSong.title + ' cover'"/>
         <div class="music-controller__music__text">
           <h4>{{ currentSong.title }}</h4>
-          <a href="#">{{ currentSong.author.name }}</a>
+          <a href="#" @click.prevent="$router.push(`/author/${currentSong.author.id}`)">{{ currentSong.author.name }}</a>
         </div>
         <div class="music-controller__music__like">
           <like-button :is-liked="isLiked" :song-id="currentSong.id"/>
@@ -208,6 +208,7 @@ export default {
       h4 {
         color: white;
         letter-spacing: 0.01em;
+        font-weight: 500;
         max-width: 150px;
         white-space: nowrap;
         text-overflow: ellipsis;

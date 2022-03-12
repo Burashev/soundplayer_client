@@ -15,7 +15,7 @@
     <div class="music-item__text">
       <h4>{{ song.title }}</h4>
       <p>
-        <a href="#" @click="$router.push(`/author/${song.author.id}`)">{{ song.author.name }}</a>
+        <a href="#" @click.prevent="$router.push(`/author/${song.author.id}`)">{{ song.author.name }}</a>
       </p>
     </div>
     <div class="music-item__like" :class="{'active' : isLiked}">
@@ -138,6 +138,7 @@ export default {
       color: white;
       margin-bottom: 10px;
       letter-spacing: 0.01em;
+      font-weight: 500;
     }
 
     p {
