@@ -35,10 +35,22 @@ export default {
     },
     likeSong({state, dispatch}, id) {
         userService.likeSong(state.userToken, id)
-            .then(() => dispatch('getUser'))
+            .then(() => {
+                dispatch('getUser')
+                dispatch('notification/createNotification', {
+                    text: 'Song added to your favorites',
+                    error: false
+                }, {root: true})
+            })
     },
     unlikeSong({state, dispatch}, id) {
         userService.unlikeSong(state.userToken, id)
-            .then(() => dispatch('getUser'))
+            .then(() => {
+                dispatch('getUser')
+                dispatch('notification/createNotification', {
+                    text: 'Song added to your favorites',
+                    error: true
+                }, {root: true})
+            })
     }
 }
