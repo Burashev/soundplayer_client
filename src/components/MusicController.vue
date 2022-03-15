@@ -17,25 +17,30 @@
         <img class="music-controller__music__cover" :src="currentSong.cover" :alt="currentSong.title + ' cover'"/>
         <div class="music-controller__music__text">
           <h4>{{ currentSong.title }}</h4>
-          <a href="#" @click.prevent="$router.push(`/author/${currentSong.author.id}`)">{{ currentSong.author.name }}</a>
+          <a href="#" @click.prevent="$router.push(`/author/${currentSong.author.id}`)">{{
+              currentSong.author.name
+            }}</a>
         </div>
         <div class="music-controller__music__like">
           <like-button :is-liked="isLiked" :song-id="currentSong.id"/>
         </div>
       </div>
-      <div class="music-controller__volume">
-        <div class="music-controller__volume__over" @mouseleave="volumeBarHide" @mouseenter="volumeBarShow"
-             v-show="isVolumeBarShow"></div>
-        <div class="music-controller__volume-bar" @mouseleave="volumeBarHide" @mouseenter="volumeBarShow"
-             v-show="isVolumeBarShow">
-          <div class="music-controller__volume-bar__progress"
-               @mousedown="volumeProgressDown"
-               @mousemove="volumeProgressMove"
-               @mouseup="volumeProgressMouseDown = false"
-          ></div>
+      <div class="music-controller__buttons">
+        <repeat-button/>
+        <div class="music-controller__volume">
+          <div class="music-controller__volume__over" @mouseleave="volumeBarHide" @mouseenter="volumeBarShow"
+               v-show="isVolumeBarShow"></div>
+          <div class="music-controller__volume-bar" @mouseleave="volumeBarHide" @mouseenter="volumeBarShow"
+               v-show="isVolumeBarShow">
+            <div class="music-controller__volume-bar__progress"
+                 @mousedown="volumeProgressDown"
+                 @mousemove="volumeProgressMove"
+                 @mouseup="volumeProgressMouseDown = false"
+            ></div>
+          </div>
+          <speaker-button size="30" @click="toggleVolume" @mouseenter="volumeBarShow" @mouseleave="volumeBarHide"
+                          :buttonStatus="speakerButtonStatus"/>
         </div>
-        <speaker-button size="30" @click="toggleVolume" @mouseenter="volumeBarShow" @mouseleave="volumeBarHide"
-                        :buttonStatus="speakerButtonStatus"/>
       </div>
     </div>
   </div>
@@ -47,6 +52,7 @@ import SpeakerButton from "@/components/ui/SpeakerButton";
 import {mapState, mapGetters} from 'vuex'
 import QueueButton from "@/components/ui/QueueButton";
 import LikeButton from "@/components/ui/LikeButton";
+import RepeatButton from "@/components/ui/RepeatButton";
 
 export default {
   name: "MusicController",
@@ -56,7 +62,7 @@ export default {
       volumeProgressMouseDown: false,
     }
   },
-  components: {PlayButton, SpeakerButton, QueueButton, LikeButton},
+  components: {PlayButton, SpeakerButton, QueueButton, LikeButton, RepeatButton},
   computed: {
     ...mapState("music", ["currentSong", "volume"]),
     ...mapGetters("music", ["songDuration", "songCurrentTime", "getVolume", "songPercent", "speakerButtonStatus"]),
@@ -196,15 +202,18 @@ export default {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+
     &__cover {
       width: 50px;
       height: 50px;
       border-radius: 7px;
     }
+
     &__text {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+
       h4 {
         color: white;
         letter-spacing: 0.01em;
@@ -214,14 +223,17 @@ export default {
         text-overflow: ellipsis;
         overflow: hidden;
       }
+
       a {
         color: #bebebe;
         text-decoration: none;
       }
+
       a:hover {
         text-decoration: underline;
       }
     }
+
     &__like {
       display: flex;
       align-items: center;

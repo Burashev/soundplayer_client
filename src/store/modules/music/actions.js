@@ -133,5 +133,10 @@ export default {
             return null;
         }
         dispatch('setCurrentSong', {song: songs[currentIndex + 1], playlist: playlist.playlistObject});
+    },
+    changeRepeatMode({commit}, repeatMode) {
+        repeatMode++;
+        if (repeatMode > 2) repeatMode = 0;
+        commit('SET_REPEAT_MODE', repeatMode);
     }
 }

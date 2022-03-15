@@ -48,7 +48,7 @@ export default {
             .then(() => {
                 dispatch('getUser')
                 dispatch('notification/createNotification', {
-                    text: 'Song added to your favorites',
+                    text: 'Song removed from your favorites',
                     error: true
                 }, {root: true})
             })

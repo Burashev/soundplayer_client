@@ -25,5 +25,8 @@ export default {
     },
     SET_CURRENT_TIME_COUNTING_INTERVAL(state, interval) {
         state.currentTimeCountingInterval = interval;
+    },
+    SET_REPEAT_MODE(state, mode) {
+        state.repeatMode = mode;
     }
 }

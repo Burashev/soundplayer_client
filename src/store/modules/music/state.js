@@ -16,4 +16,5 @@ export default {
     previousVolume: 1,
     songs: [],
     currentTimeCountingInterval: null,
+    repeatMode: 0 // 0, 1, 2
 }
