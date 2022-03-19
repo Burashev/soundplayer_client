@@ -27,6 +27,7 @@
       </div>
       <div class="music-controller__buttons">
         <repeat-button/>
+        <shuffle-button/>
         <div class="music-controller__volume">
           <div class="music-controller__volume__over" @mouseleave="volumeBarHide" @mouseenter="volumeBarShow"
                v-show="isVolumeBarShow"></div>
@@ -53,6 +54,7 @@ import {mapState, mapGetters} from 'vuex'
 import QueueButton from "@/components/ui/QueueButton";
 import LikeButton from "@/components/ui/LikeButton";
 import RepeatButton from "@/components/ui/RepeatButton";
+import ShuffleButton from "@/components/ui/ShuffleButton";
 
 export default {
   name: "MusicController",
@@ -62,7 +64,7 @@ export default {
       volumeProgressMouseDown: false,
     }
   },
-  components: {PlayButton, SpeakerButton, QueueButton, LikeButton, RepeatButton},
+  components: {ShuffleButton, PlayButton, SpeakerButton, QueueButton, LikeButton, RepeatButton},
   computed: {
     ...mapState("music", ["currentSong", "volume"]),
     ...mapGetters("music", ["songDuration", "songCurrentTime", "getVolume", "songPercent", "speakerButtonStatus"]),

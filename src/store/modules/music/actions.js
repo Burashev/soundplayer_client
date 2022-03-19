@@ -147,5 +147,8 @@ export default {
         repeatMode++;
         if (repeatMode > 2) repeatMode = 0;
         commit('SET_REPEAT_MODE', repeatMode);
+    },
+    toggleShuffleStatus({commit}) {
+        commit('SET_SHUFFLE_STATUS')
     }
 }

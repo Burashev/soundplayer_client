@@ -28,5 +28,8 @@ export default {
     },
     SET_REPEAT_MODE(state, mode) {
         state.repeatMode = mode;
+    },
+    SET_SHUFFLE_STATUS(state) {
+        state.shuffleStatus = !state.shuffleStatus;
     }
 }
