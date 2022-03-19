@@ -3,8 +3,8 @@ import playlistService from "@/services/playlistService";
 import localStorageService from '@/services/localStorageService';
 
 export default {
-    setCurrentSong({commit, state, dispatch}, {song, playlist}) {
-        if (song.id === state.currentSong.id && (!playlist || playlist.id === state.currentPlaylist.playlistObject.id)) {
+    setCurrentSong({commit, state, dispatch}, {song, playlist, repeat = false}) {
+        if (song.id === state.currentSong.id && (!playlist || playlist.id === state.currentPlaylist.playlistObject.id) && !repeat) {
             dispatch('togglePlay');
             return null
         }
@@ -79,7 +79,16 @@ export default {
             const songs = state.currentPlaylist.playlistObject.songs;
             const currentIndex = state.currentPlaylist.currentSongIndex;
 
+            if (state.repeatMode === 2) {
+                dispatch('setCurrentSong', {song: songs[currentIndex], playlist: state.currentPlaylist.playlistObject, repeat: true});
+                return null;
+            }
+
             if (songs.length - 1 === currentIndex) {
+                if (state.repeatMode === 1) {
+                    dispatch('setCurrentSong', {song: songs[0], playlist: state.currentPlaylist.playlistObject, repeat: true});
+                    return null;
+                }
                 commit('SET_SONG_PAUSE', true);
                 commit('SET_SONG_END', true);
                 return null;
