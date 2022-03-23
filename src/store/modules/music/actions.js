@@ -1,6 +1,7 @@
 import songService from '@/services/songService';
 import playlistService from "@/services/playlistService";
 import localStorageService from '@/services/localStorageService';
+import {shuffle} from "@/services/utils";
 
 export default {
     setCurrentSong({commit, state, dispatch}, {song, playlist, repeat = false}) {
@@ -33,9 +34,18 @@ export default {
     },
     setCurrentPlaylist({commit, state}, playlist) {
         const currentSongIndex = playlist.songs.findIndex((song) => song.id === state.currentSong.id)
+        let playlistToSet = null;
+
+        if (state.currentPlaylist.playlistObject.id === playlist.id) {
+            playlistToSet = state.currentPlaylist.playlistObject
+        }
+        else {
+            playlistToSet = JSON.parse(JSON.stringify(playlist))
+            if (state.shuffleStatus) playlistToSet.songs = shuffle(playlistToSet.songs)
+        }
 
         const currentPlaylist = {
-            playlistObject: playlist,
+            playlistObject: playlistToSet,
             currentSongIndex
         }
 
@@ -80,13 +90,21 @@ export default {
             const currentIndex = state.currentPlaylist.currentSongIndex;
 
             if (state.repeatMode === 2) {
-                dispatch('setCurrentSong', {song: songs[currentIndex], playlist: state.currentPlaylist.playlistObject, repeat: true});
+                dispatch('setCurrentSong', {
+                    song: songs[currentIndex],
+                    playlist: state.currentPlaylist.playlistObject,
+                    repeat: true
+                });
                 return null;
             }
 
             if (songs.length - 1 === currentIndex) {
                 if (state.repeatMode === 1) {
-                    dispatch('setCurrentSong', {song: songs[0], playlist: state.currentPlaylist.playlistObject, repeat: true});
+                    dispatch('setCurrentSong', {
+                        song: songs[0],
+                        playlist: state.currentPlaylist.playlistObject,
+                        repeat: true
+                    });
                     return null;
                 }
                 commit('SET_SONG_PAUSE', true);
