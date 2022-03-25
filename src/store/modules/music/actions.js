@@ -1,5 +1,5 @@
-import songService from '@/services/songService';
-import playlistService from "@/services/playlistService";
+import songService from '@/services/api/songService';
+import playlistService from "@/services/api/playlistService";
 import localStorageService from '@/services/localStorageService';
 import {shuffle} from "@/services/utils";
 

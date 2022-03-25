@@ -45,7 +45,7 @@
 
 <script>
 import ModalApp from "./ModalApp";
-import authService from "@/services/authService";
+import authService from "@/services/api/authService";
 
 export default {
   name: "ModalAuth",

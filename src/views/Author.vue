@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import authorService from "@/services/authorService";
+import authorService from "@/services/api/authorService";
 import PlaylistItem from "@/components/playlist/PlaylistItem";
 
 export default {

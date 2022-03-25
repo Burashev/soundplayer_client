@@ -1,6 +1,6 @@
-import authService from "@/services/authService";
+import authService from "@/services/api/authService";
 import localStorageService from '@/services/localStorageService'
-import userService from "@/services/userService";
+import userService from "@/services/api/userService";
 
 export default {
     getUserByCode({commit, store}, code) {
