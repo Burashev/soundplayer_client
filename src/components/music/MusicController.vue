@@ -48,13 +48,13 @@
 </template>
 
 <script>
-import PlayButton from "@/components/ui/PlayButton";
-import SpeakerButton from "@/components/ui/SpeakerButton";
+import PlayButton from "@/components/buttons/PlayButton";
+import SpeakerButton from "@/components/buttons/SpeakerButton";
 import {mapState, mapGetters} from 'vuex'
-import QueueButton from "@/components/ui/QueueButton";
-import LikeButton from "@/components/ui/LikeButton";
-import RepeatButton from "@/components/ui/RepeatButton";
-import ShuffleButton from "@/components/ui/ShuffleButton";
+import QueueButton from "@/components/buttons/QueueButton";
+import LikeButton from "@/components/buttons/LikeButton";
+import RepeatButton from "@/components/buttons/RepeatButton";
+import ShuffleButton from "@/components/buttons/ShuffleButton";
 
 export default {
   name: "MusicController",

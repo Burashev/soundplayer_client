@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import NotificationList from "@/components/ui/NotificationList";
+import NotificationList from "@/components/notification/NotificationList";
 import AppLayout from "@/layouts/AppLayout";
 
 export default {

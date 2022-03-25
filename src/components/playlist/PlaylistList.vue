@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import PlaylistItem from "@/components/PlaylistItem";
+import PlaylistItem from "@/components/playlist/PlaylistItem";
 
 export default {
   name: "PlaylistList",

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import MusicList from "@/components/MusicList";
+import MusicList from "@/components/music/MusicList";
 import {mapState} from "vuex";
 
 export default {

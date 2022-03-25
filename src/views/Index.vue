@@ -4,8 +4,8 @@
 </template>
 
 <script>
-import MusicList from "@/components/MusicList";
-import PlaylistList from "@/components/PlaylistList";
+import MusicList from "@/components/music/MusicList";
+import PlaylistList from "@/components/playlist/PlaylistList";
 import {mapState} from "vuex";
 import ModalShow from "@/components/modals/ModalShow";
 

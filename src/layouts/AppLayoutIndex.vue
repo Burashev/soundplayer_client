@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import MusicController from "@/components/MusicController";
+import MusicController from "@/components/music/MusicController";
 import {mapGetters, mapState} from "vuex";
-import HeaderIndex from "@/components/ui/HeaderIndex";
+import HeaderIndex from "@/components/HeaderIndex";
 
 
 export default {

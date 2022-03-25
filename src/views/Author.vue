@@ -7,7 +7,7 @@
 
 <script>
 import authorService from "@/services/authorService";
-import PlaylistItem from "@/components/PlaylistItem";
+import PlaylistItem from "@/components/playlist/PlaylistItem";
 
 export default {
   name: "Author",

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import MusicItem from "@/components/MusicItem";
+import MusicItem from "@/components/music/MusicItem";
 import { mapState } from 'vuex';
 export default {
   name: "MusicList",

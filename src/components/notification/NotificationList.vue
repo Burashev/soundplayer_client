@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import NotificationItem from "@/components/ui/NotificationItem";
+import NotificationItem from "@/components/notification/NotificationItem";
 import { mapState } from 'vuex'
 
 export default {

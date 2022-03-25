@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import PlayButton from "@/components/ui/PlayButton";
-import LikeButton from "@/components/ui/LikeButton";
+import PlayButton from "@/components/buttons/PlayButton";
+import LikeButton from "@/components/buttons/LikeButton";
 import {mapState, mapGetters} from "vuex";
 import {timeFormat} from "@/services/utils";
 
