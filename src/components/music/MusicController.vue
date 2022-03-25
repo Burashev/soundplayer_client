@@ -26,6 +26,7 @@
         </div>
       </div>
       <div class="music-controller__buttons">
+        <songs-queue-button/>
         <repeat-button/>
         <shuffle-button/>
         <div class="music-controller__volume">
@@ -55,6 +56,7 @@ import QueueButton from "@/components/buttons/QueueButton";
 import LikeButton from "@/components/buttons/LikeButton";
 import RepeatButton from "@/components/buttons/RepeatButton";
 import ShuffleButton from "@/components/buttons/ShuffleButton";
+import SongsQueueButton from "@/components/buttons/SongsQueueButton";
 
 export default {
   name: "MusicController",
@@ -64,7 +66,7 @@ export default {
       volumeProgressMouseDown: false,
     }
   },
-  components: {ShuffleButton, PlayButton, SpeakerButton, QueueButton, LikeButton, RepeatButton},
+  components: {SongsQueueButton, ShuffleButton, PlayButton, SpeakerButton, QueueButton, LikeButton, RepeatButton},
   computed: {
     ...mapState("music", ["currentSong", "volume"]),
     ...mapGetters("music", ["songDuration", "songCurrentTime", "getVolume", "songPercent", "speakerButtonStatus"]),
