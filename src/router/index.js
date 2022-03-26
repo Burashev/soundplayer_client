@@ -34,7 +34,14 @@ const routes = [
         props: true,
         meta: {
             layout: 'AppLayoutIndex',
-            isAuth: false
+        }
+    },
+    {
+        path: '/queue',
+        name: 'Queue',
+        component: () => import('@/views/Queue'),
+        meta: {
+            layout: 'AppLayoutIndex',
         }
     }
 ]
