@@ -43,6 +43,22 @@
           <speaker-button size="30" @click="toggleVolume" @mouseenter="volumeBarShow" @mouseleave="volumeBarHide"
                           :buttonStatus="speakerButtonStatus"/>
         </div>
+        <fullscreen-button v-if="!currentSong.ended" @click="setFullscreen"/>
+      </div>
+    </div>
+    <div ref="fullscreen">
+      <div class="fullscreen-section" v-if="fullscreen">
+        <div class="song-info">
+          <div class="song-info__cover">
+            <img :src="currentSong.cover" :alt="currentSong.title + ' cover'">
+          </div>
+          <div class="song-info__text">
+            <h2>{{currentSong.title}}</h2>
+            <a href="#" @click.prevent="$router.push(`/author/${currentSong.author.id}`)">{{
+                currentSong.author.name
+              }}</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -57,6 +73,7 @@ import LikeButton from "@/components/buttons/LikeButton";
 import RepeatButton from "@/components/buttons/RepeatButton";
 import ShuffleButton from "@/components/buttons/ShuffleButton";
 import SongsQueueButton from "@/components/buttons/SongsQueueButton";
+import FullscreenButton from "@/components/buttons/FullscreenButton";
 
 export default {
   name: "MusicController",
@@ -64,9 +81,13 @@ export default {
     return {
       isVolumeBarShow: false,
       volumeProgressMouseDown: false,
+      fullscreen: false,
     }
   },
-  components: {SongsQueueButton, ShuffleButton, PlayButton, SpeakerButton, QueueButton, LikeButton, RepeatButton},
+  components: {
+    FullscreenButton,
+    SongsQueueButton, ShuffleButton, PlayButton, SpeakerButton, QueueButton, LikeButton, RepeatButton
+  },
   computed: {
     ...mapState("music", ["currentSong", "volume"]),
     ...mapGetters("music", ["songDuration", "songCurrentTime", "getVolume", "songPercent", "speakerButtonStatus"]),
@@ -102,10 +123,24 @@ export default {
       if (!this.volume) this.$store.dispatch('music/changeVolume', {previous: true});
       else this.$store.dispatch('music/changeVolume', {volume: 0});
     },
-  }
+    setFullscreen() {
+      this.fullscreen = !this.fullscreen
+      if (this.fullscreen) {
 
+        this.$refs.fullscreen.requestFullscreen();
+      }
+    }
+  },
 }
 </script>
+
+<style>
+button.btn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+</style>
 
 <style lang="scss" scoped>
 .music-controller {
@@ -241,6 +276,58 @@ export default {
     &__like {
       display: flex;
       align-items: center;
+    }
+  }
+
+  .fullscreen-section {
+    height: 100vh;
+    width: 100vw;
+    background-color: #2d2d2f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .song-info {
+      display: flex;
+      gap: 20px;
+      &__cover {
+        max-width: 600px;
+        max-height: 600px;
+        width: 100%;
+        height: 100%;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      &__text {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 30px;
+
+        h2 {
+          color: white;
+          letter-spacing: 0.01em;
+          font-weight: 500;
+          max-width: 500px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          font-size: 2.5rem;
+        }
+
+        a {
+          font-size: 1.4rem;
+          color: #bebebe;
+          text-decoration: none;
+        }
+
+        a:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
 }
